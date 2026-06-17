@@ -434,9 +434,7 @@ input[type="text"]:focus, select:focus {
   box-shadow: 0 0 0 3px var(--accent-blue-subtle);
 }
 
-input[type="file"] {
-  display: none;
-}
+input[type="file"] { display: none; }
 
 .search-field { padding-left: 32px; }
 
@@ -521,65 +519,6 @@ tbody td {
   font-variant-numeric: tabular-nums;
 }
 
-.td-ticker {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 12px;
-  color: var(--accent-blue);
-}
-
-.td-sector-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 500;
-  background: var(--accent-blue-subtle);
-  color: var(--accent-blue);
-}
-
-.val-up { color: var(--accent-green); font-weight: 600; }
-.val-down { color: var(--accent-red); font-weight: 600; }
-.val-neutral { color: var(--text-muted); }
-.val-nm { color: var(--text-muted); font-style: italic; font-size: 11px; }
-
-/* Upside bar indicator */
-.upside-bar-wrap { display: flex; align-items: center; gap: 6px; }
-.upside-bar-bg { width: 48px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; flex-shrink: 0; }
-.upside-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
-
-/* Row checkbox */
-.row-check { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
-
-/* Column visibility toggle */
-.col-toggle-panel {
-  position: absolute;
-  right: 0; top: calc(100% + 4px);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 10px;
-  z-index: 300;
-  min-width: 200px;
-  display: none;
-}
-.col-toggle-panel.open { display: block; animation: fadeInDown 0.12s ease; }
-.col-toggle-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 13px;
-  transition: background var(--transition);
-}
-.col-toggle-option:hover { background: var(--bg-card-hover); }
-.col-toggle-option input { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
-
-.col-toggle-wrap { position: relative; }
-
 /* =========================================
    PAGINATION
    ========================================= */
@@ -618,47 +557,6 @@ tbody td {
 .page-size-select { width: auto; padding: 6px 10px; }
 
 /* =========================================
-   BULK ACTION BAR
-   ========================================= */
-.bulk-bar {
-  background: var(--accent-blue);
-  color: #fff;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  margin-bottom: 8px;
-  animation: slideDown 0.15s ease;
-}
-.bulk-bar.visible { display: flex; }
-.bulk-actions { display: flex; gap: 8px; }
-.bulk-btn {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  padding: 5px 12px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font-size: 12px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  transition: background var(--transition);
-}
-.bulk-btn:hover { background: rgba(255,255,255,0.25); }
-
-/* =========================================
-   EMPTY STATE
-   ========================================= */
-.empty-state {
-  padding: 64px 24px;
-  text-align: center;
-}
-.empty-state svg { margin-bottom: 16px; color: var(--text-muted); }
-.empty-state h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-.empty-state p { color: var(--text-muted); font-size: 13px; }
-
-/* =========================================
    LOADING OVERLAY
    ========================================= */
 .loading-overlay {
@@ -688,10 +586,9 @@ tbody td {
   inset: 0;
   background: rgba(0,0,0,0.6);
   z-index: 1000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  display: none;
 }
 .modal-overlay.open { display: flex; animation: fadeIn 0.15s ease; }
 .modal {
@@ -718,9 +615,7 @@ tbody td {
 }
 .modal-close:hover { color: var(--text-primary); }
 
-/* =========================================
-   UPLOAD AREA
-   ========================================= */
+/* Upload Styles */
 .upload-area {
   border: 2px dashed var(--border);
   border-radius: var(--radius-lg);
@@ -742,89 +637,41 @@ tbody td {
   background: var(--accent-blue-subtle);
 }
 
-.upload-icon {
-  font-size: 32px;
-  margin-bottom: 12px;
-}
+.upload-icon { font-size: 32px; margin-bottom: 12px; }
+.upload-area h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
+.upload-area p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+.upload-hint { font-size: 12px; color: var(--text-muted); font-style: italic; }
 
-.upload-area h3 {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: var(--text-primary);
-}
+.modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.file-info { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; font-size: 13px; color: var(--text-secondary); }
+.file-info-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.file-info-label { font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.4px; }
+.file-info-value { color: var(--text-primary); font-weight: 500; }
 
-.upload-area p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-}
-
-.upload-hint {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-.modal-content {
+/* =========================================
+   SECTION HEADERS
+   ========================================= */
+.section-header {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.modal-footer {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.upload-progress {
-  width: 100%;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 8px 0;
-}
-
-.upload-progress-bar {
-  height: 100%;
-  background: var(--accent-blue);
-  width: 0%;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.file-info {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 12px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.file-info-row {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
-
-.file-info-label {
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.section-title .count {
+  display: inline-block;
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+  border-radius: 20px;
+  padding: 1px 8px;
   font-size: 11px;
-  letter-spacing: 0.4px;
-}
-
-.file-info-value {
-  color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 700;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
 /* =========================================
@@ -851,14 +698,12 @@ tbody td {
 }
 
 @media print {
-  .app-header, .filters-bar, .table-toolbar, .pagination, .bulk-bar, .toast-container,
-  .btn, .tabs { display: none !important; }
+  .app-header, .filters-bar, .table-toolbar, .pagination, .btn, .tabs { display: none !important; }
   .main-content { padding: 0; }
   .table-wrapper { border: none; }
   body { background: white; color: black; }
 }
 
-/* Sector color dots */
 .sector-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
 </style>
 </head>
@@ -871,6 +716,43 @@ tbody td {
   <div style="text-align:center">
     <div class="spinner" style="margin: 0 auto 16px"></div>
     <div style="color:var(--text-secondary);font-size:13px">Loading dashboard…</div>
+  </div>
+</div>
+
+<!-- =========================================
+     UPLOAD MODAL
+     ========================================= -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <button class="modal-close" id="closeUploadModal">✕</button>
+    <h2 class="modal-title">Upload Market Data</h2>
+    
+    <div class="upload-area" id="uploadArea">
+      <div class="upload-icon">📁</div>
+      <h3>Drop Excel file here</h3>
+      <p>or click to browse</p>
+      <div class="upload-hint">Supported: .xlsx, .xls (Max 10 MB)</div>
+    </div>
+    
+    <input type="file" id="fileInput" accept=".xlsx,.xls" />
+    
+    <div id="fileInfoContainer" style="display: none;">
+      <div class="file-info">
+        <div class="file-info-row">
+          <span class="file-info-label">File Name</span>
+          <span class="file-info-value" id="fileInfoName">-</span>
+        </div>
+        <div class="file-info-row">
+          <span class="file-info-label">File Size</span>
+          <span class="file-info-value" id="fileInfoSize">-</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancelUploadBtn">Cancel</button>
+      <button class="btn btn-primary" id="confirmUploadBtn" disabled>Upload & Apply</button>
+    </div>
   </div>
 </div>
 
@@ -895,57 +777,6 @@ tbody td {
     <button class="btn btn-icon" id="themeToggle" title="Toggle dark/light mode">🌙</button>
   </div>
 </header>
-
-<!-- =========================================
-     UPLOAD MODAL
-     ========================================= -->
-<div class="modal-overlay" id="uploadModal">
-  <div class="modal">
-    <button class="modal-close" id="closeUploadModal">✕</button>
-    <h2 class="modal-title">Upload Market Data</h2>
-    
-    <div class="modal-content">
-      <div class="upload-area" id="uploadArea">
-        <div class="upload-icon">📁</div>
-        <h3>Drop Excel file here</h3>
-        <p>or click to browse</p>
-        <div class="upload-hint">Supported: .xlsx, .xls (Max 10 MB)</div>
-      </div>
-      
-      <input type="file" id="fileInput" accept=".xlsx,.xls" />
-      
-      <div id="fileInfoContainer" style="display: none;">
-        <div class="file-info">
-          <div class="file-info-row">
-            <span class="file-info-label">File Name</span>
-            <span class="file-info-value" id="fileInfoName">-</span>
-          </div>
-          <div class="file-info-row">
-            <span class="file-info-label">File Size</span>
-            <span class="file-info-value" id="fileInfoSize">-</span>
-          </div>
-          <div class="file-info-row">
-            <span class="file-info-label">Status</span>
-            <span class="file-info-value" id="fileInfoStatus">Ready</span>
-          </div>
-        </div>
-        <div class="upload-progress">
-          <div class="upload-progress-bar" id="uploadProgressBar"></div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="modal-footer">
-      <button class="btn btn-ghost" id="cancelUploadBtn">Cancel</button>
-      <button class="btn btn-primary" id="confirmUploadBtn" disabled>Upload & Apply</button>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================
-     TOAST CONTAINER
-     ========================================= -->
-<div class="toast-container" id="toastContainer"></div>
 
 <!-- =========================================
      MAIN CONTENT
@@ -974,94 +805,115 @@ tbody td {
       </div>
       <div class="chart-card">
         <div class="card-header">
-          <div class="card-title">Market Breadth</div>
+          <div class="card-title">P/E Ratio by Sector</div>
         </div>
-        <canvas id="chartBreadth"></canvas>
+        <canvas id="chartPESector"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">ROAE by Sector</div>
+        </div>
+        <canvas id="chartROAE"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">P/B Distribution</div>
+        </div>
+        <canvas id="chartPBDist"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">Dividend Yield by Sector</div>
+        </div>
+        <canvas id="chartDY"></canvas>
       </div>
     </div>
+
+    <!-- Top Movers Table -->
+    <div class="section-header">
+      <div class="section-title">Top Opportunities <span class="count" id="topMoversCount">10</span></div>
+      <button class="btn btn-ghost" onclick="switchTab('table')">View all →</button>
+    </div>
+    <div class="table-wrapper" style="margin-bottom:24px">
+      <div class="table-scroll">
+        <table id="topMoversTable">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Sector</th>
+              <th>Price</th>
+              <th>Consensus Upside</th>
+              <th>MTR Upside</th>
+              <th>P/E</th>
+              <th>P/B</th>
+              <th>DY (%)</th>
+              <th>ROAE</th>
+            </tr>
+          </thead>
+          <tbody id="topMoversBody"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 
   <!-- ===== TAB: DATA TABLE ===== -->
   <div id="tab-table" class="tab-content" style="display:none">
+
+    <!-- Filters -->
     <div class="filters-bar">
       <div class="filters-row">
-        <div class="search-input-wrap">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="6.5" cy="6.5" r="5"/>
-            <path d="M11 11l4 4"/>
-          </svg>
-          <input type="text" id="searchInput" class="search-field" placeholder="Search ticker, sector...">
+        <div class="search-input-wrap" style="min-width:220px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" class="search-field" id="searchInput" placeholder="Search ticker, sector…">
         </div>
+        <button class="btn" id="applyFiltersBtn" onclick="applyFilters()">Apply</button>
+        <button class="btn btn-ghost" id="resetFiltersBtn" onclick="resetFilters()">Reset</button>
       </div>
     </div>
 
-    <div class="bulk-bar" id="bulkBar">
-      <div>
-        <span id="bulkCount">0</span> selected
-      </div>
-      <div class="bulk-actions">
-        <button class="bulk-btn" id="bulkExportBtn">Export Selected</button>
-      </div>
-    </div>
-
-    <div class="table-wrapper">
+    <!-- Table -->
+    <div class="table-wrapper" id="mainTableWrapper">
       <div class="table-toolbar">
-        <div class="table-info">
-          Showing <span id="tableRowCount">0</span> records
-        </div>
+        <div class="table-info">Showing <span id="tableShowing">0</span> of <span id="tableTotal">0</span> results</div>
         <div class="table-actions">
-          <div class="col-toggle-wrap">
-            <button class="btn btn-ghost" id="colToggleBtn" title="Show/hide columns">⚙️ Columns</button>
-            <div class="col-toggle-panel" id="colTogglePanel"></div>
-          </div>
+          <button class="btn" onclick="exportAll('csv')">⬇ CSV</button>
+          <button class="btn" onclick="exportAll('excel')">⬇ Excel</button>
         </div>
       </div>
       <div class="table-scroll">
-        <table id="dataTable">
-          <thead>
-            <tr id="tableHeader"></tr>
-          </thead>
-          <tbody id="tableBody">
-          </tbody>
+        <table id="mainTable">
+          <thead id="mainTableHead"></thead>
+          <tbody id="mainTableBody"></tbody>
         </table>
       </div>
-      <div class="pagination">
-        <div class="page-info">
-          Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
-        </div>
-        <div class="page-controls">
-          <button class="page-btn" id="prevPageBtn">← Prev</button>
-          <button class="page-btn" id="nextPageBtn">Next →</button>
-          <select class="page-size-select" id="pageSizeSelect">
-            <option value="10">10 per page</option>
-            <option value="25">25 per page</option>
-            <option value="50">50 per page</option>
-          </select>
+      <div class="pagination" id="pagination">
+        <div class="page-info" id="paginationInfo"></div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary)">
+            Rows:
+            <select id="pageSizeSelect" class="page-size-select">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div class="page-controls" id="pageControls"></div>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- ===== TAB: CHARTS ===== -->
+  <!-- ===== TAB: ANALYTICS ===== -->
   <div id="tab-charts" class="tab-content" style="display:none">
-    <div class="charts-grid">
-      <div class="chart-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="chart-card" style="grid-column:span 2">
         <div class="card-header">
-          <div class="card-title">Price Change (YTD)</div>
+          <div class="card-title">Market Cap Distribution (Top 20 stocks)</div>
         </div>
-        <canvas id="chartPriceChange"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="card-header">
-          <div class="card-title">P/E Distribution</div>
-        </div>
-        <canvas id="chartPEDist"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="card-header">
-          <div class="card-title">Volume Ranking</div>
-        </div>
-        <canvas id="chartVolume"></canvas>
+        <canvas id="chartMktCapBar" style="max-height:300px"></canvas>
       </div>
     </div>
   </div>
@@ -1073,505 +925,392 @@ tbody td {
      ========================================= -->
 <script>
 // =========================================
-// STATE & CONFIG
+// GLOBAL STATE
 // =========================================
-const state = {
-  data: [],
-  filteredData: [],
-  currentPage: 1,
-  pageSize: 10,
-  sortColumn: null,
-  sortDirection: 'asc',
-  selectedRows: new Set(),
-  visibleColumns: {},
-  currentFile: null,
-  charts: {}
+let dashboardData = [];
+let filteredData = [];
+let currentPage = 1;
+let pageSize = 25;
+let charts = {};
+
+const columns = {
+  ticker: 'Ticker',
+  sector: 'Sector',
+  price: 'Price',
+  consensusUpside: 'Consensus Upside',
+  mtrUpside: 'MTR Upside',
+  pe: 'P/E',
+  pb: 'P/B',
+  dy: 'DY (%)',
+  roae: 'ROAE'
 };
-
-const uploadConfig = {
-  maxFileSize: 10 * 1024 * 1024,
-  allowedFormats: ['xlsx', 'xls']
-};
-
-// =========================================
-// UTILITIES
-// =========================================
-function formatNumber(num) {
-  if (num === null || num === undefined) return 'N/A';
-  return new Intl.NumberFormat('en-US', { 
-    maximumFractionDigits: 2, 
-    minimumFractionDigits: 0 
-  }).format(num);
-}
-
-function showToast(message, type = 'info') {
-  const toastContainer = document.getElementById('toastContainer');
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  const icons = { success: '✓', error: '✕', info: 'ℹ' };
-  toast.innerHTML = `<span>${icons[type]}</span><span>${message}</span>`;
-  toastContainer.appendChild(toast);
-  setTimeout(() => toast.remove(), 4000);
-}
 
 // =========================================
 // UPLOAD FUNCTIONALITY
 // =========================================
-const uploadBtn = document.getElementById('uploadBtn');
-const uploadModal = document.getElementById('uploadModal');
-const uploadArea = document.getElementById('uploadArea');
-const fileInput = document.getElementById('fileInput');
-const closeUploadModal = document.getElementById('closeUploadModal');
-const cancelUploadBtn = document.getElementById('cancelUploadBtn');
-const confirmUploadBtn = document.getElementById('confirmUploadBtn');
-const fileInfoContainer = document.getElementById('fileInfoContainer');
-
-uploadBtn.addEventListener('click', () => uploadModal.classList.add('open'));
-closeUploadModal.addEventListener('click', () => {
-  uploadModal.classList.remove('open');
-  resetUploadModal();
-});
-cancelUploadBtn.addEventListener('click', () => {
-  uploadModal.classList.remove('open');
-  resetUploadModal();
+document.getElementById('uploadBtn').addEventListener('click', () => {
+  document.getElementById('uploadModal').classList.add('open');
 });
 
-uploadArea.addEventListener('click', () => fileInput.click());
-uploadArea.addEventListener('dragover', (e) => {
+document.getElementById('closeUploadModal').addEventListener('click', closeModal);
+document.getElementById('cancelUploadBtn').addEventListener('click', closeModal);
+
+document.getElementById('uploadArea').addEventListener('click', () => {
+  document.getElementById('fileInput').click();
+});
+
+document.getElementById('uploadArea').addEventListener('dragover', (e) => {
   e.preventDefault();
-  uploadArea.classList.add('dragover');
-});
-uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-uploadArea.addEventListener('drop', (e) => {
-  e.preventDefault();
-  uploadArea.classList.remove('dragover');
-  if (e.dataTransfer.files.length > 0) handleFileSelection(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener('change', (e) => {
-  if (e.target.files.length > 0) handleFileSelection(e.target.files[0]);
+  document.getElementById('uploadArea').classList.add('dragover');
 });
 
-function handleFileSelection(file) {
-  const fileExtension = file.name.split('.').pop().toLowerCase();
-  if (!uploadConfig.allowedFormats.includes(fileExtension)) {
-    showToast('Only .xlsx and .xls files are supported', 'error');
+document.getElementById('uploadArea').addEventListener('dragleave', () => {
+  document.getElementById('uploadArea').classList.remove('dragover');
+});
+
+document.getElementById('uploadArea').addEventListener('drop', (e) => {
+  e.preventDefault();
+  document.getElementById('uploadArea').classList.remove('dragover');
+  if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
+});
+
+document.getElementById('fileInput').addEventListener('change', (e) => {
+  if (e.target.files.length > 0) handleFileSelect(e.target.files[0]);
+});
+
+function handleFileSelect(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['xlsx', 'xls'].includes(ext)) {
+    alert('Only .xlsx and .xls files are supported');
     return;
   }
-  if (file.size > uploadConfig.maxFileSize) {
-    showToast('File size exceeds 10 MB limit', 'error');
+  if (file.size > 10 * 1024 * 1024) {
+    alert('File size exceeds 10 MB');
     return;
   }
-  state.currentFile = file;
-  displayFileInfo(file);
-  confirmUploadBtn.disabled = false;
-}
-
-function displayFileInfo(file) {
-  const fileSize = (file.size / 1024 / 1024).toFixed(2);
-  document.getElementById('fileInfoName').textContent = file.name;
-  document.getElementById('fileInfoSize').textContent = fileSize + ' MB';
-  document.getElementById('fileInfoStatus').textContent = 'Ready to upload';
-  fileInfoContainer.style.display = 'block';
-}
-
-function resetUploadModal() {
-  fileInput.value = '';
-  state.currentFile = null;
-  fileInfoContainer.style.display = 'none';
-  document.getElementById('uploadProgressBar').style.width = '0%';
-  confirmUploadBtn.disabled = true;
-}
-
-confirmUploadBtn.addEventListener('click', () => {
-  if (!state.currentFile) return;
-  document.getElementById('fileInfoStatus').textContent = 'Processing...';
-  document.getElementById('uploadProgressBar').style.width = '50%';
   
+  document.getElementById('fileInfoName').textContent = file.name;
+  document.getElementById('fileInfoSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+  document.getElementById('fileInfoContainer').style.display = 'block';
+  document.getElementById('confirmUploadBtn').disabled = false;
+  
+  document.getElementById('confirmUploadBtn').onclick = () => processFile(file);
+}
+
+function processFile(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
-      document.getElementById('uploadProgressBar').style.width = '75%';
       const workbook = XLSX.read(e.target.result, { type: 'array' });
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+      const data = XLSX.utils.sheet_to_json(worksheet);
       
-      if (jsonData.length === 0) throw new Error('Excel file is empty');
+      if (data.length === 0) throw new Error('File is empty');
       
-      document.getElementById('uploadProgressBar').style.width = '90%';
-      state.data = jsonData;
-      state.filteredData = [...jsonData];
-      state.currentPage = 1;
-      localStorage.setItem('dashboardData', JSON.stringify(jsonData));
-      localStorage.setItem('dataUploadDate', new Date().toISOString());
+      dashboardData = data;
+      filteredData = [...data];
+      currentPage = 1;
       
-      document.getElementById('uploadProgressBar').style.width = '100%';
+      localStorage.setItem('dashboardData', JSON.stringify(data));
       
-      setTimeout(() => {
-        uploadModal.classList.remove('open');
-        resetUploadModal();
-        showToast(`Data updated! (${jsonData.length} records)`, 'success');
-        initializeTable();
-        renderTable();
-        renderKPIs();
-        renderCharts();
-      }, 300);
+      closeModal();
+      alert('✅ Data uploaded successfully! (' + data.length + ' records)');
       
-    } catch (error) {
-      document.getElementById('fileInfoStatus').textContent = 'Error processing file';
-      document.getElementById('uploadProgressBar').style.width = '0%';
-      showToast(`Error: ${error.message}`, 'error');
+      renderAll();
+      
+    } catch (err) {
+      alert('Error: ' + err.message);
     }
   };
-  reader.readAsArrayBuffer(state.currentFile);
-});
+  reader.readAsArrayBuffer(file);
+}
+
+function closeModal() {
+  document.getElementById('uploadModal').classList.remove('open');
+  document.getElementById('fileInput').value = '';
+  document.getElementById('fileInfoContainer').style.display = 'none';
+  document.getElementById('confirmUploadBtn').disabled = true;
+}
 
 // =========================================
-// KPI RENDERING
+// MAIN RENDER FUNCTIONS
 // =========================================
+function renderAll() {
+  renderKPIs();
+  renderCharts();
+  renderTopMovers();
+  renderMainTable();
+}
+
 function renderKPIs() {
+  if (dashboardData.length === 0) return;
+  
   const kpiGrid = document.getElementById('kpiGrid');
-  if (state.data.length === 0) {
-    kpiGrid.innerHTML = '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--text-muted);">No data available</div>';
-    return;
-  }
-
-  const kpis = [
-    { label: 'Total Records', value: state.data.length, color: '--accent-blue' },
-    { label: 'Avg Price', value: calculateAvg('Price'), color: '--accent-green' },
-    { label: 'Total Volume', value: calculateSum('Volume'), color: '--accent-amber' },
-    { label: 'Data Updated', value: formatDate(localStorage.getItem('dataUploadDate')), color: '--accent-purple' }
-  ];
-
-  kpiGrid.innerHTML = kpis.map(kpi => `
-    <div class="kpi-card" style="--kpi-color: var(${kpi.color})">
-      <div class="kpi-label">${kpi.label}</div>
-      <div class="kpi-value">${kpi.value}</div>
+  const avgPrice = dashboardData.reduce((sum, r) => sum + (parseFloat(r[columns.price]) || 0), 0) / dashboardData.length;
+  const avgUpside = dashboardData.reduce((sum, r) => sum + (parseFloat(r[columns.consensusUpside]) || 0), 0) / dashboardData.length;
+  const sectors = new Set(dashboardData.map(r => r[columns.sector])).size;
+  
+  kpiGrid.innerHTML = `
+    <div class="kpi-card" style="--kpi-color: var(--accent-blue)">
+      <div class="kpi-label">Total Stocks</div>
+      <div class="kpi-value">${dashboardData.length}</div>
     </div>
-  `).join('');
+    <div class="kpi-card" style="--kpi-color: var(--accent-green)">
+      <div class="kpi-label">Avg Price</div>
+      <div class="kpi-value">EGP ${avgPrice.toFixed(2)}</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent-amber)">
+      <div class="kpi-label">Avg Upside</div>
+      <div class="kpi-value">${avgUpside.toFixed(1)}%</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--accent-purple)">
+      <div class="kpi-label">Sectors</div>
+      <div class="kpi-value">${sectors}</div>
+    </div>
+  `;
 }
 
-function calculateAvg(column) {
-  const values = state.data
-    .map(row => parseFloat(row[column]))
-    .filter(v => !isNaN(v));
-  if (values.length === 0) return 'N/A';
-  const avg = values.reduce((a, b) => a + b, 0) / values.length;
-  return formatNumber(avg);
-}
-
-function calculateSum(column) {
-  const values = state.data
-    .map(row => parseFloat(row[column]))
-    .filter(v => !isNaN(v));
-  if (values.length === 0) return 'N/A';
-  return formatNumber(values.reduce((a, b) => a + b, 0));
-}
-
-function formatDate(dateStr) {
-  if (!dateStr) return 'N/A';
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-}
-
-// =========================================
-// CHART RENDERING
-// =========================================
 function renderCharts() {
-  if (state.data.length === 0) return;
-
-  // Destroy existing charts
-  Object.values(state.charts).forEach(chart => chart?.destroy?.());
-  state.charts = {};
-
+  if (dashboardData.length === 0) return;
+  
+  Object.values(charts).forEach(c => c?.destroy?.());
+  charts = {};
+  
+  // Sector grouping
+  const sectorMap = {};
+  dashboardData.forEach(row => {
+    const sector = row[columns.sector] || 'Other';
+    if (!sectorMap[sector]) sectorMap[sector] = [];
+    sectorMap[sector].push(row);
+  });
+  
+  const sectorNames = Object.keys(sectorMap);
+  const colors = ['#388bfd', '#3fb950', '#d29922', '#bc8cff', '#f85149', '#39d353'];
+  
   // Chart 1: Sector Market Cap
-  const sectorData = groupByColumn('Sector');
-  const sectorCanvas = document.getElementById('chartSectorMktCap');
-  if (sectorCanvas && sectorData.labels.length > 0) {
-    state.charts.sectorMktCap = new Chart(sectorCanvas, {
+  const ctx1 = document.getElementById('chartSectorMktCap');
+  if (ctx1) {
+    charts.sectorMktCap = new Chart(ctx1, {
       type: 'doughnut',
       data: {
-        labels: sectorData.labels,
+        labels: sectorNames,
         datasets: [{
-          data: sectorData.values,
-          backgroundColor: ['#388bfd', '#3fb950', '#d29922', '#bc8cff', '#f85149']
+          data: sectorNames.map(s => sectorMap[s].length),
+          backgroundColor: colors.slice(0, sectorNames.length)
         }]
       },
       options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
     });
   }
-
+  
   // Chart 2: Upside Distribution
-  const upsideCanvas = document.getElementById('chartUpsideDist');
-  if (upsideCanvas) {
-    const ranges = groupByRange('Upside', 5);
-    state.charts.upsideDist = new Chart(upsideCanvas, {
+  const ctx2 = document.getElementById('chartUpsideDist');
+  if (ctx2) {
+    const upsideValues = dashboardData.map(r => parseFloat(r[columns.consensusUpside]) || 0).filter(v => !isNaN(v));
+    const ranges = {};
+    upsideValues.forEach(v => {
+      const range = Math.floor(v / 10) * 10;
+      ranges[range] = (ranges[range] || 0) + 1;
+    });
+    
+    charts.upsideDist = new Chart(ctx2, {
       type: 'bar',
       data: {
-        labels: ranges.labels,
+        labels: Object.keys(ranges).map(k => k + '% - ' + (parseInt(k) + 10) + '%'),
         datasets: [{
           label: 'Count',
-          data: ranges.values,
+          data: Object.values(ranges),
           backgroundColor: '#388bfd'
         }]
       },
-      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y' }
+      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y', plugins: { legend: { display: false } } }
     });
   }
-
-  // Chart 3: Market Breadth
-  const breadthCanvas = document.getElementById('chartBreadth');
-  if (breadthCanvas) {
-    const gainers = state.data.filter(r => parseFloat(r.Change) > 0).length;
-    const losers = state.data.filter(r => parseFloat(r.Change) < 0).length;
-    state.charts.breadth = new Chart(breadthCanvas, {
+  
+  // Chart 3: P/E by Sector
+  const ctx3 = document.getElementById('chartPESector');
+  if (ctx3) {
+    const peData = sectorNames.map(s => {
+      const peValues = sectorMap[s].map(r => parseFloat(r[columns.pe]) || 0).filter(v => v > 0);
+      return peValues.length > 0 ? peValues.reduce((a, b) => a + b) / peValues.length : 0;
+    });
+    
+    charts.peSector = new Chart(ctx3, {
       type: 'bar',
       data: {
-        labels: ['Gainers', 'Losers'],
+        labels: sectorNames,
         datasets: [{
-          data: [gainers, losers],
-          backgroundColor: ['#3fb950', '#f85149']
+          label: 'Avg P/E',
+          data: peData,
+          backgroundColor: colors.slice(0, sectorNames.length)
         }]
       },
-      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
+      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y', plugins: { legend: { display: false } } }
     });
   }
 }
 
-function groupByColumn(column) {
-  const groups = {};
-  state.data.forEach(row => {
-    const key = row[column] || 'Unknown';
-    groups[key] = (groups[key] || 0) + 1;
-  });
-  return { labels: Object.keys(groups), values: Object.values(groups) };
+function renderTopMovers() {
+  if (dashboardData.length === 0) return;
+  
+  const sorted = [...dashboardData]
+    .filter(r => r[columns.consensusUpside])
+    .sort((a, b) => (parseFloat(b[columns.consensusUpside]) || 0) - (parseFloat(a[columns.consensusUpside]) || 0))
+    .slice(0, 10);
+  
+  const tbody = document.getElementById('topMoversBody');
+  tbody.innerHTML = sorted.map(row => `
+    <tr>
+      <td><strong>${row[columns.ticker]}</strong></td>
+      <td>${row[columns.sector]}</td>
+      <td>${row[columns.price]}</td>
+      <td><span style="color:var(--accent-green);font-weight:600">${row[columns.consensusUpside]}%</span></td>
+      <td>${row[columns.mtrUpside]}</td>
+      <td>${row[columns.pe]}</td>
+      <td>${row[columns.pb]}</td>
+      <td>${row[columns.dy]}</td>
+      <td>${row[columns.roae]}</td>
+    </tr>
+  `).join('');
+  
+  document.getElementById('topMoversCount').textContent = sorted.length;
 }
 
-function groupByRange(column, range) {
-  const values = state.data.map(r => parseFloat(r[column])).filter(v => !isNaN(v));
-  if (values.length === 0) return { labels: [], values: [] };
-  
-  const min = Math.floor(Math.min(...values) / range) * range;
-  const max = Math.ceil(Math.max(...values) / range) * range;
-  const ranges = {};
-  
-  for (let i = min; i <= max; i += range) {
-    const label = `${i} - ${i + range}`;
-    ranges[label] = state.data.filter(row => {
-      const val = parseFloat(row[column]);
-      return val >= i && val < i + range;
-    }).length;
-  }
-  
-  return { labels: Object.keys(ranges), values: Object.values(ranges) };
-}
-
-// =========================================
-// TABLE INITIALIZATION & RENDERING
-// =========================================
-function initializeTable() {
-  if (state.data.length === 0) return;
-  const firstRow = state.data[0];
-  const columns = Object.keys(firstRow);
-  state.visibleColumns = {};
-  columns.forEach(col => state.visibleColumns[col] = true);
-}
-
-function renderTable() {
-  const { filteredData, currentPage, pageSize } = state;
-  
-  if (filteredData.length === 0) {
-    document.getElementById('tableBody').innerHTML = '';
-    document.getElementById('tableRowCount').textContent = '0';
-    document.getElementById('totalPages').textContent = '1';
-    document.getElementById('currentPage').textContent = '1';
-    return;
-  }
-  
-  const columns = Object.keys(state.visibleColumns).filter(col => state.visibleColumns[col]);
-  const headerRow = document.getElementById('tableHeader');
-  headerRow.innerHTML = '<th style="width:40px;"><input type="checkbox" id="selectAllCheck"></th>';
-  
-  columns.forEach(col => {
-    const th = document.createElement('th');
-    th.className = 'sortable';
-    th.textContent = col;
-    th.addEventListener('click', () => sortTable(col));
-    headerRow.appendChild(th);
-  });
-  
-  const totalPages = Math.ceil(filteredData.length / pageSize);
+function renderMainTable() {
+  const total = filteredData.length;
+  const totalPages = Math.ceil(total / pageSize);
   const start = (currentPage - 1) * pageSize;
-  const end = Math.min(start + pageSize, filteredData.length);
-  const pageData = filteredData.slice(start, end);
+  const pageData = filteredData.slice(start, start + pageSize);
   
-  const tbody = document.getElementById('tableBody');
-  tbody.innerHTML = pageData.map((row, idx) => {
-    return `<tr data-row-index="${start + idx}">
-      <td><input type="checkbox" class="row-check" data-row-index="${start + idx}"></td>
-      ${columns.map(col => `<td>${formatNumber(row[col])}</td>`).join('')}
-    </tr>`;
-  }).join('');
+  // Headers
+  const thead = document.getElementById('mainTableHead');
+  thead.innerHTML = `<tr>${Object.values(columns).map(col => `<th class="sortable">${col}</th>`).join('')}</tr>`;
   
-  document.querySelectorAll('.row-check').forEach(checkbox => {
-    checkbox.addEventListener('change', toggleRowSelection);
-  });
+  // Body
+  const tbody = document.getElementById('mainTableBody');
+  tbody.innerHTML = pageData.map(row => `
+    <tr>
+      ${Object.values(columns).map(col => `<td>${row[col] || '-'}</td>`).join('')}
+    </tr>
+  `).join('');
   
-  document.getElementById('selectAllCheck').addEventListener('change', toggleAllRows);
-  document.getElementById('tableRowCount').textContent = filteredData.length;
-  document.getElementById('totalPages').textContent = totalPages;
-  document.getElementById('currentPage').textContent = currentPage;
-  document.getElementById('prevPageBtn').disabled = currentPage === 1;
-  document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
+  // Pagination
+  document.getElementById('tableShowing').textContent = start + 1;
+  document.getElementById('tableTotal').textContent = total;
+  document.getElementById('paginationInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+  
+  const pageControls = document.getElementById('pageControls');
+  pageControls.innerHTML = `
+    <button class="page-btn" onclick="prevPage()" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>
+    <button class="page-btn" onclick="nextPage()" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>
+  `;
 }
 
-function sortTable(column) {
-  if (state.sortColumn === column) {
-    state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
-  } else {
-    state.sortColumn = column;
-    state.sortDirection = 'asc';
-  }
-  
-  state.filteredData.sort((a, b) => {
-    const aVal = a[column];
-    const bVal = b[column];
-    
-    if (typeof aVal === 'number' && typeof bVal === 'number') {
-      return state.sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
-    }
-    
-    return state.sortDirection === 'asc' 
-      ? String(aVal).localeCompare(String(bVal))
-      : String(bVal).localeCompare(String(aVal));
-  });
-  
-  state.currentPage = 1;
-  renderTable();
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  filteredData = dashboardData.filter(row => 
+    Object.values(columns).some(col => (row[col] || '').toString().toLowerCase().includes(search))
+  );
+  currentPage = 1;
+  renderMainTable();
 }
 
-function toggleRowSelection(e) {
-  const rowIndex = parseInt(e.target.dataset.rowIndex);
-  if (e.target.checked) {
-    state.selectedRows.add(rowIndex);
-  } else {
-    state.selectedRows.delete(rowIndex);
-  }
-  updateBulkBar();
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  filteredData = [...dashboardData];
+  currentPage = 1;
+  renderMainTable();
 }
 
-function toggleAllRows(e) {
-  const tbody = document.getElementById('tableBody');
-  const checkboxes = tbody.querySelectorAll('.row-check');
-  state.selectedRows.clear();
-  
-  if (e.target.checked) {
-    checkboxes.forEach(cb => {
-      cb.checked = true;
-      state.selectedRows.add(parseInt(cb.dataset.rowIndex));
-    });
-  } else {
-    checkboxes.forEach(cb => cb.checked = false);
-  }
-  updateBulkBar();
-}
-
-function updateBulkBar() {
-  const bulkBar = document.getElementById('bulkBar');
-  const count = state.selectedRows.size;
-  
-  if (count > 0) {
-    bulkBar.classList.add('visible');
-    document.getElementById('bulkCount').textContent = count;
-  } else {
-    bulkBar.classList.remove('visible');
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    renderMainTable();
   }
 }
 
-document.getElementById('prevPageBtn').addEventListener('click', () => {
-  if (state.currentPage > 1) {
-    state.currentPage--;
-    renderTable();
+function nextPage() {
+  const totalPages = Math.ceil(filteredData.length / pageSize);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderMainTable();
   }
-});
+}
 
-document.getElementById('nextPageBtn').addEventListener('click', () => {
-  const totalPages = Math.ceil(state.filteredData.length / state.pageSize);
-  if (state.currentPage < totalPages) {
-    state.currentPage++;
-    renderTable();
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`tab-${tab}`).style.display = 'block';
+}
+
+function exportAll(format) {
+  if (format === 'csv') {
+    const csv = [Object.values(columns).join(',')]
+      .concat(filteredData.map(r => Object.values(columns).map(c => r[c] || '').join(',')))
+      .join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.csv';
+    a.click();
   }
-});
-
-document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
-  state.pageSize = parseInt(e.target.value);
-  state.currentPage = 1;
-  renderTable();
-});
-
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  const query = e.target.value.toLowerCase();
-  state.filteredData = state.data.filter(row => {
-    return Object.values(row).some(val => 
-      String(val).toLowerCase().includes(query)
-    );
-  });
-  state.currentPage = 1;
-  renderTable();
-});
+}
 
 // =========================================
-// TABS
+// TAB SWITCHING
 // =========================================
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-    
-    tab.classList.add('active');
-    document.getElementById(`tab-${tab.dataset.tab}`).style.display = 'block';
+    switchTab(tab.dataset.tab);
   });
 });
 
 // =========================================
-// THEME TOGGLE
+// THEME
 // =========================================
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click', () => {
+document.getElementById('themeToggle').addEventListener('click', () => {
   document.body.classList.toggle('light-mode');
   localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
   updateThemeIcon();
 });
 
 function updateThemeIcon() {
-  themeToggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+  document.getElementById('themeToggle').textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
 }
+
+// =========================================
+// PAGE SIZE SELECT
+// =========================================
+document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
+  pageSize = parseInt(e.target.value);
+  currentPage = 1;
+  renderMainTable();
+});
 
 // =========================================
 // INITIALIZATION
 // =========================================
 function init() {
-  const loadingOverlay = document.getElementById('loadingOverlay');
-  
   if (localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
   }
   updateThemeIcon();
   
-  const savedData = localStorage.getItem('dashboardData');
-  if (savedData) {
+  const saved = localStorage.getItem('dashboardData');
+  if (saved) {
     try {
-      state.data = JSON.parse(savedData);
-      state.filteredData = [...state.data];
-      initializeTable();
-      renderTable();
-      renderKPIs();
-      renderCharts();
+      dashboardData = JSON.parse(saved);
+      filteredData = [...dashboardData];
+      renderAll();
     } catch (e) {
-      console.error('Failed to load saved data:', e);
+      console.error('Load error:', e);
     }
   }
   
-  loadingOverlay.classList.add('hidden');
+  document.getElementById('loadingOverlay').classList.add('hidden');
 }
 
 init();
