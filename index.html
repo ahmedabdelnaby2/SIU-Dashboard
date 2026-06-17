@@ -434,11 +434,108 @@ input[type="text"]:focus, select:focus {
   box-shadow: 0 0 0 3px var(--accent-blue-subtle);
 }
 
-input[type="file"] { display: none; }
-
 .search-field { padding-left: 32px; }
 
 select option { background: var(--bg-secondary); }
+
+.multiselect-dropdown {
+  position: relative;
+  min-width: 180px;
+}
+
+.multiselect-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+  user-select: none;
+}
+
+.multiselect-trigger:hover { border-color: var(--accent-blue); }
+.multiselect-trigger.open { border-color: var(--accent-blue); box-shadow: 0 0 0 3px var(--accent-blue-subtle); }
+
+.multiselect-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 220px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  padding: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  display: none;
+}
+
+.multiselect-panel.open { display: block; animation: fadeInDown 0.12s ease; }
+
+.multiselect-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background var(--transition);
+}
+
+.multiselect-option:hover { background: var(--bg-card-hover); }
+.multiselect-option input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
+
+.filter-count-badge {
+  background: var(--accent-blue);
+  color: #fff;
+  border-radius: 20px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+}
+
+.range-inputs { display: flex; align-items: center; gap: 6px; }
+.range-inputs input { width: 80px; }
+.range-sep { color: var(--text-muted); font-size: 12px; }
+
+.filter-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 10px;
+}
+
+.preset-btn {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-sans);
+}
+
+.preset-btn:hover, .preset-btn.active {
+  background: var(--accent-blue-subtle);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
 
 /* =========================================
    TABLE
@@ -519,6 +616,65 @@ tbody td {
   font-variant-numeric: tabular-nums;
 }
 
+.td-ticker {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--accent-blue);
+}
+
+.td-sector-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+}
+
+.val-up { color: var(--accent-green); font-weight: 600; }
+.val-down { color: var(--accent-red); font-weight: 600; }
+.val-neutral { color: var(--text-muted); }
+.val-nm { color: var(--text-muted); font-style: italic; font-size: 11px; }
+
+/* Upside bar indicator */
+.upside-bar-wrap { display: flex; align-items: center; gap: 6px; }
+.upside-bar-bg { width: 48px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+.upside-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+
+/* Row checkbox */
+.row-check { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
+
+/* Column visibility toggle */
+.col-toggle-panel {
+  position: absolute;
+  right: 0; top: calc(100% + 4px);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 10px;
+  z-index: 300;
+  min-width: 200px;
+  display: none;
+}
+.col-toggle-panel.open { display: block; animation: fadeInDown 0.12s ease; }
+.col-toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background var(--transition);
+}
+.col-toggle-option:hover { background: var(--bg-card-hover); }
+.col-toggle-option input { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
+
+.col-toggle-wrap { position: relative; }
+
 /* =========================================
    PAGINATION
    ========================================= */
@@ -557,6 +713,47 @@ tbody td {
 .page-size-select { width: auto; padding: 6px 10px; }
 
 /* =========================================
+   BULK ACTION BAR
+   ========================================= */
+.bulk-bar {
+  background: var(--accent-blue);
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  animation: slideDown 0.15s ease;
+}
+.bulk-bar.visible { display: flex; }
+.bulk-actions { display: flex; gap: 8px; }
+.bulk-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: background var(--transition);
+}
+.bulk-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+.empty-state {
+  padding: 64px 24px;
+  text-align: center;
+}
+.empty-state svg { margin-bottom: 16px; color: var(--text-muted); }
+.empty-state h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.empty-state p { color: var(--text-muted); font-size: 13px; }
+
+/* =========================================
    LOADING OVERLAY
    ========================================= */
 .loading-overlay {
@@ -586,9 +783,10 @@ tbody td {
   inset: 0;
   background: rgba(0,0,0,0.6);
   z-index: 1000;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 .modal-overlay.open { display: flex; animation: fadeIn 0.15s ease; }
 .modal {
@@ -615,38 +813,11 @@ tbody td {
 }
 .modal-close:hover { color: var(--text-primary); }
 
-/* Upload Styles */
-.upload-area {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  text-align: center;
-  cursor: pointer;
-  transition: all var(--transition);
-  background: var(--bg-card);
-  margin-bottom: 16px;
-}
-
-.upload-area:hover {
-  border-color: var(--accent-blue);
-  background: var(--bg-card-hover);
-}
-
-.upload-area.dragover {
-  border-color: var(--accent-blue);
-  background: var(--accent-blue-subtle);
-}
-
-.upload-icon { font-size: 32px; margin-bottom: 12px; }
-.upload-area h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
-.upload-area p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
-.upload-hint { font-size: 12px; color: var(--text-muted); font-style: italic; }
-
-.modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-.file-info { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; font-size: 13px; color: var(--text-secondary); }
-.file-info-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
-.file-info-label { font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.4px; }
-.file-info-value { color: var(--text-primary); font-weight: 500; }
+/* Drill-down detail card */
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.detail-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; }
+.detail-item-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+.detail-item-value { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* =========================================
    SECTION HEADERS
@@ -675,6 +846,66 @@ tbody td {
 }
 
 /* =========================================
+   ADVANCED FILTER BUILDER
+   ========================================= */
+.filter-builder { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-subtle); display: none; }
+.filter-builder.open { display: block; animation: fadeInDown 0.15s ease; }
+.filter-rule { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.filter-rule select, .filter-rule input { width: auto; }
+.filter-connector { font-size: 11px; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; padding: 3px 8px; background: var(--accent-amber-subtle); border-radius: 20px; }
+.add-rule-btn {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: all var(--transition);
+}
+.add-rule-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.remove-rule-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-red);
+  font-size: 16px;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+/* =========================================
+   TOAST NOTIFICATIONS
+   ========================================= */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  font-size: 13px;
+  box-shadow: var(--shadow-lg);
+  min-width: 250px;
+  max-width: 350px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInRight 0.2s ease;
+}
+.toast.success { border-left: 3px solid var(--accent-green); }
+.toast.error { border-left: 3px solid var(--accent-red); }
+.toast.info { border-left: 3px solid var(--accent-blue); }
+
+/* =========================================
    ANIMATIONS
    ========================================= */
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -694,16 +925,17 @@ tbody td {
   .filters-row { flex-direction: column; align-items: stretch; }
   .search-input-wrap { min-width: 100%; }
   .table-toolbar { flex-direction: column; align-items: flex-start; }
-  .modal { min-width: 90%; max-width: 90%; }
 }
 
 @media print {
-  .app-header, .filters-bar, .table-toolbar, .pagination, .btn, .tabs { display: none !important; }
+  .app-header, .filters-bar, .table-toolbar, .pagination, .bulk-bar, .toast-container,
+  .btn, .tabs { display: none !important; }
   .main-content { padding: 0; }
   .table-wrapper { border: none; }
   body { background: white; color: black; }
 }
 
+/* Sector color dots */
 .sector-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
 </style>
 </head>
@@ -716,43 +948,6 @@ tbody td {
   <div style="text-align:center">
     <div class="spinner" style="margin: 0 auto 16px"></div>
     <div style="color:var(--text-secondary);font-size:13px">Loading dashboard…</div>
-  </div>
-</div>
-
-<!-- =========================================
-     UPLOAD MODAL
-     ========================================= -->
-<div class="modal-overlay" id="uploadModal">
-  <div class="modal">
-    <button class="modal-close" id="closeUploadModal">✕</button>
-    <h2 class="modal-title">Upload Market Data</h2>
-    
-    <div class="upload-area" id="uploadArea">
-      <div class="upload-icon">📁</div>
-      <h3>Drop Excel file here</h3>
-      <p>or click to browse</p>
-      <div class="upload-hint">Supported: .xlsx, .xls (Max 10 MB)</div>
-    </div>
-    
-    <input type="file" id="fileInput" accept=".xlsx,.xls" />
-    
-    <div id="fileInfoContainer" style="display: none;">
-      <div class="file-info">
-        <div class="file-info-row">
-          <span class="file-info-label">File Name</span>
-          <span class="file-info-value" id="fileInfoName">-</span>
-        </div>
-        <div class="file-info-row">
-          <span class="file-info-label">File Size</span>
-          <span class="file-info-value" id="fileInfoSize">-</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="modal-footer">
-      <button class="btn btn-ghost" id="cancelUploadBtn">Cancel</button>
-      <button class="btn btn-primary" id="confirmUploadBtn" disabled>Upload & Apply</button>
-    </div>
   </div>
 </div>
 
@@ -773,7 +968,6 @@ tbody td {
       <button class="tab" data-tab="table">Data Table</button>
       <button class="tab" data-tab="charts">Analytics</button>
     </div>
-    <button class="btn btn-primary" id="uploadBtn" title="Upload Excel file">📤 Upload Data</button>
     <button class="btn btn-icon" id="themeToggle" title="Toggle dark/light mode">🌙</button>
   </div>
 </header>
@@ -829,7 +1023,7 @@ tbody td {
       </div>
     </div>
 
-    <!-- Top Movers Table -->
+    <!-- Top Movers Table (quick overview) -->
     <div class="section-header">
       <div class="section-title">Top Opportunities <span class="count" id="topMoversCount">10</span></div>
       <button class="btn btn-ghost" onclick="switchTab('table')">View all →</button>
@@ -863,12 +1057,96 @@ tbody td {
     <!-- Filters -->
     <div class="filters-bar">
       <div class="filters-row">
+        <!-- Search -->
         <div class="search-input-wrap" style="min-width:220px">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <input type="text" class="search-field" id="searchInput" placeholder="Search ticker, sector…">
         </div>
-        <button class="btn" id="applyFiltersBtn" onclick="applyFilters()">Apply</button>
-        <button class="btn btn-ghost" id="resetFiltersBtn" onclick="resetFilters()">Reset</button>
+
+        <!-- Sector multi-select -->
+        <div class="filter-group">
+          <div class="filter-label">Sector</div>
+          <div class="multiselect-dropdown" id="sectorDropdown">
+            <div class="multiselect-trigger" onclick="toggleDropdown('sectorDropdown')">
+              <span id="sectorTriggerLabel">All Sectors</span>
+              <span>▾</span>
+            </div>
+            <div class="multiselect-panel" id="sectorPanel"></div>
+          </div>
+        </div>
+
+        <!-- Currency filter -->
+        <div class="filter-group">
+          <div class="filter-label">Currency</div>
+          <select id="currencyFilter" style="width:100px">
+            <option value="">All</option>
+            <option value="EGP">EGP</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+
+        <!-- Upside filter -->
+        <div class="filter-group">
+          <div class="filter-label">Consensus Upside</div>
+          <div class="range-inputs">
+            <input type="number" id="upsideMin" placeholder="Min %" style="width:70px">
+            <span class="range-sep">–</span>
+            <input type="number" id="upsideMax" placeholder="Max %" style="width:70px">
+          </div>
+        </div>
+
+        <!-- P/E filter -->
+        <div class="filter-group">
+          <div class="filter-label">P/E Range</div>
+          <div class="range-inputs">
+            <input type="number" id="peMin" placeholder="Min" style="width:60px">
+            <span class="range-sep">–</span>
+            <input type="number" id="peMax" placeholder="Max" style="width:60px">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:auto">
+          <button class="btn" id="applyFiltersBtn">Apply</button>
+          <button class="btn btn-ghost" id="resetFiltersBtn">Reset</button>
+          <button class="btn btn-ghost" id="advancedFilterBtn">⚙ Advanced</button>
+        </div>
+      </div>
+
+      <!-- Quick Presets -->
+      <div class="filter-presets">
+        <span style="font-size:11px;color:var(--text-muted);font-weight:600;margin-right:4px">Quick:</span>
+        <button class="preset-btn" data-preset="undervalued">Undervalued (P/B &lt; 1)</button>
+        <button class="preset-btn" data-preset="highupside">High Upside (&gt;25%)</button>
+        <button class="preset-btn" data-preset="highdy">High DY (&gt;5%)</button>
+        <button class="preset-btn" data-preset="banks">Banks Only</button>
+        <button class="preset-btn" data-preset="lowpe">Low P/E (&lt; 7)</button>
+        <button class="preset-btn" data-preset="highroae">High ROAE (&gt; 30%)</button>
+      </div>
+
+      <!-- Advanced Filter Builder -->
+      <div class="filter-builder" id="filterBuilder">
+        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Advanced Filter Builder</div>
+        <div id="filterRules"></div>
+        <button class="add-rule-btn" id="addRuleBtn">+ Add condition</button>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn btn-primary" onclick="applyAdvancedFilters()">Apply Rules</button>
+          <select id="filterLogic" style="width:80px">
+            <option value="AND">AND</option>
+            <option value="OR">OR</option>
+          </select>
+          <span style="font-size:12px;color:var(--text-muted);align-self:center">Match all / any conditions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk Action Bar -->
+    <div class="bulk-bar" id="bulkBar">
+      <div><span id="selectedCount">0</span> rows selected</div>
+      <div class="bulk-actions">
+        <button class="bulk-btn" onclick="copySelectedToClipboard()">📋 Copy</button>
+        <button class="bulk-btn" onclick="exportSelected('excel')">📊 Export Excel</button>
+        <button class="bulk-btn" onclick="exportSelected('csv')">📄 Export CSV</button>
+        <button class="bulk-btn" onclick="clearSelection()">✕ Clear</button>
       </div>
     </div>
 
@@ -879,6 +1157,11 @@ tbody td {
         <div class="table-actions">
           <button class="btn" onclick="exportAll('csv')">⬇ CSV</button>
           <button class="btn" onclick="exportAll('excel')">⬇ Excel</button>
+          <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
+          <div class="col-toggle-wrap">
+            <button class="btn btn-ghost" id="colToggleBtn">⚙ Columns</button>
+            <div class="col-toggle-panel" id="colTogglePanel"></div>
+          </div>
         </div>
       </div>
       <div class="table-scroll">
@@ -897,6 +1180,7 @@ tbody td {
               <option value="25" selected>25</option>
               <option value="50">50</option>
               <option value="100">100</option>
+              <option value="9999">All</option>
             </select>
           </div>
           <div class="page-controls" id="pageControls"></div>
@@ -915,406 +1199,1083 @@ tbody td {
         </div>
         <canvas id="chartMktCapBar" style="max-height:300px"></canvas>
       </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">P/E vs P/B Scatter (click for detail)</div>
+        </div>
+        <canvas id="chartScatter" style="max-height:320px"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">Consensus vs MTR Upside by Sector</div>
+        </div>
+        <canvas id="chartUpsideComp" style="max-height:320px"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">Stocks with Upside &gt; 0 by Sector</div>
+        </div>
+        <canvas id="chartUpsideCount" style="max-height:300px"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="card-header">
+          <div class="card-title">Avg DY (%) vs Avg ROAE by Sector</div>
+        </div>
+        <canvas id="chartDYvROAE" style="max-height:300px"></canvas>
+      </div>
     </div>
   </div>
 
-</div>
+</div><!-- /main-content -->
 
 <!-- =========================================
-     JAVASCRIPT
+     DRILL-DOWN MODAL
      ========================================= -->
-<script>
-// =========================================
-// GLOBAL STATE
-// =========================================
-let dashboardData = [];
-let filteredData = [];
-let currentPage = 1;
-let pageSize = 25;
-let charts = {};
+<div class="modal-overlay" id="drillModal">
+  <div class="modal" id="drillModalContent">
+    <button class="modal-close" onclick="closeDrill()">×</button>
+    <div class="modal-title" id="drillTitle"></div>
+    <div id="drillBody"></div>
+  </div>
+</div>
 
-const columns = {
-  ticker: 'Ticker',
-  sector: 'Sector',
-  price: 'Price',
-  consensusUpside: 'Consensus Upside',
-  mtrUpside: 'MTR Upside',
-  pe: 'P/E',
-  pb: 'P/B',
-  dy: 'DY (%)',
-  roae: 'ROAE'
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+/* =======================================================
+   DATA — All 84 stocks extracted from SIU Excel
+   ======================================================= */
+const RAW_DATA = [{"sector":"Banks","ticker":"COMI","currency":"EGP","lastPrice":135.4,"mktCap":455210.67,"consensusTP":169.48,"consensusUpside":0.2517,"mtrFV":156,"mtrUpside":0.1521,"lastFinancials":"Mar-26","ttmEPS":24.67,"ttmPE":5.49,"bvps":63.99,"pb":2.12,"dpsLast":2.5,"dpsProposed":6,"dyPct":0.0443,"payoutRatio":0.2432,"roae":0.32,"fy":"2026","isBank":true,"car":0.302,"nplRatio":0.025,"ltdRatio":0.5},{"sector":"Banks","ticker":"SAUD","currency":"EGP","lastPrice":22,"mktCap":15655.31,"consensusTP":11.6,"consensusUpside":-0.4727,"mtrFV":28,"mtrUpside":0.2727,"lastFinancials":"Mar-26","ttmEPS":5.4,"ttmPE":4.07,"bvps":20.84,"pb":1.06,"dpsLast":0.85,"dpsProposed":0.94,"dyPct":0.0429,"payoutRatio":0.1744,"roae":0.2868,"fy":"2026","isBank":true,"car":0.164,"nplRatio":0.038,"ltdRatio":0.56},{"sector":"Banks","ticker":"HDBK","currency":"EGP","lastPrice":146.9,"mktCap":75439.29,"consensusTP":126.07,"consensusUpside":-0.1418,"mtrFV":135,"mtrUpside":-0.0810,"lastFinancials":"Mar-26","ttmEPS":36.39,"ttmPE":4.04,"bvps":78.54,"pb":1.87,"dpsLast":5,"dpsProposed":8,"dyPct":0.0545,"payoutRatio":0.2198,"roae":0.5479,"fy":"2026","isBank":true,"car":0.42,"nplRatio":0.054,"ltdRatio":0.4},{"sector":"Banks","ticker":"EXPA","currency":"EGP","lastPrice":18.63,"mktCap":25255.2,"consensusTP":null,"consensusUpside":null,"mtrFV":26.6,"mtrUpside":0.4278,"lastFinancials":"Mar-26","ttmEPS":5.54,"ttmPE":3.36,"bvps":19.46,"pb":0.96,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.3248,"fy":"2026","isBank":true,"car":0.168,"nplRatio":0.023,"ltdRatio":0.59},{"sector":"Banks","ticker":"ADIB","currency":"EGP","lastPrice":47.3,"mktCap":68700,"consensusTP":48.76,"consensusUpside":0.0309,"mtrFV":40,"mtrUpside":-0.1543,"lastFinancials":"Mar-26","ttmEPS":9.14,"ttmPE":5.17,"bvps":24.52,"pb":1.93,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.4309,"fy":"2026","isBank":true,"car":0.194,"nplRatio":0.03,"ltdRatio":0.55},{"sector":"Banks","ticker":"UBEE","currency":"EGP","lastPrice":13.92,"mktCap":15400,"consensusTP":22,"consensusUpside":0.5805,"mtrFV":14.8,"mtrUpside":0.0632,"lastFinancials":"Mar-26","ttmEPS":2.05,"ttmPE":6.8,"bvps":15.48,"pb":0.9,"dpsLast":0.75,"dpsProposed":0.75,"dyPct":0.0539,"payoutRatio":0.3665,"roae":0.1441,"fy":"2026","isBank":true,"car":0.2214,"nplRatio":0.0205,"ltdRatio":0.48},{"sector":"Banks","ticker":"CIEB","currency":"EGP","lastPrice":23.6,"mktCap":29612.5,"consensusTP":33.38,"consensusUpside":0.4142,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":4.96,"ttmPE":4.76,"bvps":18.9,"pb":1.25,"dpsLast":3.2,"dpsProposed":3.32,"dyPct":0.1407,"payoutRatio":0.6694,"roae":0.3539,"fy":"2026","isBank":true,"car":0.204,"nplRatio":0.02,"ltdRatio":0.57},{"sector":"Banks","ticker":"CANA","currency":"EGP","lastPrice":37.44,"mktCap":35710,"consensusTP":null,"consensusUpside":null,"mtrFV":37,"mtrUpside":-0.0118,"lastFinancials":"Mar-26","ttmEPS":6.72,"ttmPE":5.57,"bvps":21,"pb":1.78,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.38,"fy":"2026","isBank":true,"car":0.167,"nplRatio":0.03,"ltdRatio":0.61},{"sector":"Banks","ticker":"QNBE","currency":"EGP","lastPrice":53.33,"mktCap":113128.21,"consensusTP":65.32,"consensusUpside":0.2249,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":15.06,"ttmPE":3.54,"bvps":54.56,"pb":0.977,"dpsLast":1.5,"dpsProposed":2,"dyPct":0.0375,"payoutRatio":0.1328,"roae":0.308,"fy":"2026","isBank":true,"car":0.272,"nplRatio":0.05,"ltdRatio":0.57},{"sector":"Banks","ticker":"EGBE","currency":"EGP","lastPrice":0.431,"mktCap":229.24,"consensusTP":0.206,"consensusUpside":-0.5229,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":7.52,"ttmPE":3.04,"bvps":25.5,"pb":0.896,"dpsLast":0.58,"dpsProposed":0.8,"dyPct":0.035,"payoutRatio":0.1064,"roae":0.3843,"fy":"2026","isBank":true,"car":0.1638,"nplRatio":0.04,"ltdRatio":0.52},{"sector":"Banks","ticker":"FAIT","currency":"EGP","lastPrice":37.6,"mktCap":23919.67,"consensusTP":23.7,"consensusUpside":-0.3697,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":9.12,"ttmPE":4.12,"bvps":72.89,"pb":0.516,"dpsLast":3.05,"dpsProposed":1.9,"dyPct":0.0505,"payoutRatio":0.2084,"roae":0.1576,"fy":"2026","isBank":true,"car":0.268,"nplRatio":0.021,"ltdRatio":0.08},{"sector":"Banks","ticker":"FAITA","currency":"EGP","lastPrice":0.999,"mktCap":635.53,"consensusTP":0.447,"consensusUpside":-0.5524,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":9.12,"ttmPE":5.81,"bvps":72.89,"pb":0.726,"dpsLast":0.06,"dpsProposed":0.04,"dyPct":0.04,"payoutRatio":null,"roae":0.1576,"fy":"2026","isBank":true,"car":0.268,"nplRatio":0.021,"ltdRatio":0.08},{"sector":"Non-Bank Financial Services","ticker":"HRHO","currency":"EGP","lastPrice":27,"mktCap":38323.98,"consensusTP":37.53,"consensusUpside":0.3898,"mtrFV":32.8,"mtrUpside":0.2148,"lastFinancials":"Mar-26","ttmEPS":2.73,"ttmPE":9.91,"bvps":26.06,"pb":1.036,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1085,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-2016.07,"netDebtEquity":-0.0545},{"sector":"Non-Bank Financial Services","ticker":"BTFH","currency":"EGP","lastPrice":3.02,"mktCap":32797.41,"consensusTP":4.9,"consensusUpside":0.6225,"mtrFV":4.9,"mtrUpside":0.6225,"lastFinancials":"Mar-26","ttmEPS":0.19,"ttmPE":15.79,"bvps":2.24,"pb":1.351,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0572,"fy":"2026","isBank":false,"evEbitda":7.85,"netDebt":45283.2,"netDebtEquity":1.865},{"sector":"Non-Bank Financial Services","ticker":"RAYA","currency":"EGP","lastPrice":6.97,"mktCap":30354.4,"consensusTP":null,"consensusUpside":null,"mtrFV":5,"mtrUpside":-0.2826,"lastFinancials":"Mar-26","ttmEPS":0.598,"ttmPE":11.66,"bvps":1.472,"pb":4.735,"dpsLast":0.04,"dpsProposed":0,"dyPct":0.0057,"payoutRatio":0,"roae":0.5142,"fy":"2026","isBank":false,"evEbitda":7.05,"netDebt":20213.2,"netDebtEquity":3.153},{"sector":"Non-Bank Financial Services","ticker":"CICH","currency":"EGP","lastPrice":11.55,"mktCap":11550,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":1.6,"ttmPE":7.22,"bvps":7.8,"pb":1.481,"dpsLast":0.35,"dpsProposed":0.57,"dyPct":0.0494,"payoutRatio":0.3562,"roae":0.2134,"fy":"2026","isBank":false,"evEbitda":4.73,"netDebt":18966.3,"netDebtEquity":2.432},{"sector":"Non-Bank Financial Services","ticker":"CNFN","currency":"EGP","lastPrice":4.42,"mktCap":5326.53,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":0.295,"ttmPE":14.98,"bvps":3.559,"pb":1.242,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0875,"fy":"2026","isBank":false,"evEbitda":13.47,"netDebt":7050.27,"netDebtEquity":1.644},{"sector":"Non-Bank Financial Services","ticker":"BINV","currency":"EGP","lastPrice":47.49,"mktCap":10372.23,"consensusTP":null,"consensusUpside":null,"mtrFV":44.4,"mtrUpside":-0.0651,"lastFinancials":"Dec-25","ttmEPS":2.47,"ttmPE":19.23,"bvps":26.84,"pb":1.769,"dpsLast":0.025,"dpsProposed":1.5,"dyPct":0.0316,"payoutRatio":0.6075,"roae":0.0989,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-2280.26,"netDebtEquity":-0.389},{"sector":"Non-Bank Financial Services","ticker":"AIHC","currency":"EGP","lastPrice":0.501,"mktCap":746.34,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Sep-25","ttmEPS":-0.0936,"ttmPE":null,"bvps":0.2086,"pb":2.402,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":-0.2395,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":759.33,"netDebtEquity":2.444},{"sector":"Non-Bank Financial Services","ticker":"VALU","currency":"EGP","lastPrice":11.6,"mktCap":24454.8,"consensusTP":37.35,"consensusUpside":2.2202,"mtrFV":15.9,"mtrUpside":0.3707,"lastFinancials":"Dec-25","ttmEPS":0.356,"ttmPE":32.6,"bvps":1.071,"pb":10.83,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.33,"fy":"2026","isBank":false,"evEbitda":9.25,"netDebt":9537.36,"netDebtEquity":4.223},{"sector":"Non-Bank Financial Services","ticker":"OFH","currency":"EGP","lastPrice":0.617,"mktCap":2822.29,"consensusTP":null,"consensusUpside":null,"mtrFV":0.9,"mtrUpside":0.4587,"lastFinancials":"Mar-26","ttmEPS":0.12,"ttmPE":5.14,"bvps":0.681,"pb":0.906,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1762,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-1021.84,"netDebtEquity":-0.328},{"sector":"Non-Bank Financial Services","ticker":"ATLC","currency":"EGP","lastPrice":5.2,"mktCap":1968,"consensusTP":5.5,"consensusUpside":0.0577,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":0.789,"ttmPE":6.59,"bvps":3.23,"pb":1.61,"dpsLast":0.47,"dpsProposed":0.346,"dyPct":0.0665,"payoutRatio":0.4383,"roae":0.2639,"fy":"2026","isBank":false,"evEbitda":27.75,"netDebt":6201.43,"netDebtEquity":5.072},{"sector":"IT, Media & Communication Services","ticker":"RACC","currency":"EGP","lastPrice":9.71,"mktCap":1934.29,"consensusTP":14.3,"consensusUpside":0.4727,"mtrFV":9.9,"mtrUpside":0.0196,"lastFinancials":"Mar-26","ttmEPS":1.607,"ttmPE":6.04,"bvps":6.2,"pb":1.566,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.3156,"fy":"2026","isBank":false,"evEbitda":2.77,"netDebt":155.75,"netDebtEquity":0.126},{"sector":"IT, Media & Communication Services","ticker":"ETEL","currency":"EGP","lastPrice":92.22,"mktCap":154814.32,"consensusTP":114.2,"consensusUpside":0.2383,"mtrFV":98,"mtrUpside":0.0627,"lastFinancials":"Mar-26","ttmEPS":12.47,"ttmPE":7.4,"bvps":36.77,"pb":2.508,"dpsLast":1.5,"dpsProposed":1.5,"dyPct":0.0163,"payoutRatio":0.12,"roae":0.3891,"fy":"2026","isBank":false,"evEbitda":5.17,"netDebt":64772.6,"netDebtEquity":1.049},{"sector":"IT, Media & Communication Services","ticker":"FWRY","currency":"EGP","lastPrice":18.8,"mktCap":62680.03,"consensusTP":20.8,"consensusUpside":0.1064,"mtrFV":21.3,"mtrUpside":0.133,"lastFinancials":"Mar-26","ttmEPS":0.881,"ttmPE":21.35,"bvps":2.49,"pb":7.551,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.4389,"fy":"2026","isBank":false,"evEbitda":15.01,"netDebt":-3398.77,"netDebtEquity":-0.409},{"sector":"IT, Media & Communication Services","ticker":"EFIH","currency":"EGP","lastPrice":21.31,"mktCap":73146.67,"consensusTP":21.78,"consensusUpside":0.0221,"mtrFV":22.1,"mtrUpside":0.0371,"lastFinancials":"Mar-26","ttmEPS":0.84,"ttmPE":25.37,"bvps":2.545,"pb":8.373,"dpsLast":0.28,"dpsProposed":0.11,"dyPct":0.00516,"payoutRatio":0.1310,"roae":0.3457,"fy":"2026","isBank":false,"evEbitda":22.71,"netDebt":-2767.77,"netDebtEquity":-0.317},{"sector":"Health Care & Pharmaceuticals","ticker":"RMDA","currency":"EGP","lastPrice":5.1,"mktCap":10440,"consensusTP":6.09,"consensusUpside":0.1944,"mtrFV":5,"mtrUpside":-0.0196,"lastFinancials":"Mar-26","ttmEPS":0.134,"ttmPE":37.97,"bvps":1.1,"pb":4.636,"dpsLast":0.106,"dpsProposed":0.03,"dyPct":0.00588,"payoutRatio":0.2234,"roae":0.1471,"fy":"2026","isBank":false,"evEbitda":11.89,"netDebt":2307.22,"netDebtEquity":1.025},{"sector":"Health Care & Pharmaceuticals","ticker":"PHAR","currency":"EGP","lastPrice":84.01,"mktCap":14259.86,"consensusTP":96.8,"consensusUpside":0.1522,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":8.89,"ttmPE":9.45,"bvps":38.7,"pb":2.171,"dpsLast":3,"dpsProposed":3.5,"dyPct":0.0417,"payoutRatio":0.3937,"roae":0.28,"fy":"2026","isBank":false,"evEbitda":9.34,"netDebt":7364.3,"netDebtEquity":1.121},{"sector":"Health Care & Pharmaceuticals","ticker":"ISPH","currency":"EGP","lastPrice":12.15,"mktCap":12106.08,"consensusTP":17.18,"consensusUpside":0.4136,"mtrFV":18.79,"mtrUpside":0.5465,"lastFinancials":"Mar-26","ttmEPS":0.76,"ttmPE":15.99,"bvps":2.859,"pb":4.25,"dpsLast":0.16,"dpsProposed":0.13,"dyPct":0.0107,"payoutRatio":0.171,"roae":0.4056,"fy":"2026","isBank":false,"evEbitda":9.82,"netDebt":6292.74,"netDebtEquity":2.209},{"sector":"Health Care & Pharmaceuticals","ticker":"MPCI","currency":"EGP","lastPrice":219,"mktCap":5067.56,"consensusTP":null,"consensusUpside":null,"mtrFV":203.9,"mtrUpside":-0.0689,"lastFinancials":"Mar-26","ttmEPS":22.78,"ttmPE":9.61,"bvps":35.9,"pb":6.1,"dpsLast":13.19,"dpsProposed":0,"dyPct":0.0602,"payoutRatio":0,"roae":0.7017,"fy":"2026","isBank":false,"evEbitda":7.46,"netDebt":-499.87,"netDebtEquity":-0.6018},{"sector":"Health Care & Pharmaceuticals","ticker":"CLHO","currency":"EGP","lastPrice":15.49,"mktCap":21973.66,"consensusTP":15.1,"consensusUpside":-0.0252,"mtrFV":11.6,"mtrUpside":-0.2511,"lastFinancials":"Mar-26","ttmEPS":0.3,"ttmPE":51.63,"bvps":1.852,"pb":8.364,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.2153,"fy":"2026","isBank":false,"evEbitda":14.7,"netDebt":671.95,"netDebtEquity":0.2558},{"sector":"Food, Beverages & Tobacco","ticker":"EFID","currency":"EGP","lastPrice":28.75,"mktCap":40166.78,"consensusTP":34.88,"consensusUpside":0.2130,"mtrFV":35.5,"mtrUpside":0.2348,"lastFinancials":"Mar-26","ttmEPS":2.18,"ttmPE":13.19,"bvps":4.658,"pb":6.173,"dpsLast":1.14,"dpsProposed":0.864,"dyPct":0.0301,"payoutRatio":0.3963,"roae":0.5815,"fy":"2026","isBank":false,"evEbitda":8.72,"netDebt":266.5,"netDebtEquity":0.041},{"sector":"Food, Beverages & Tobacco","ticker":"DOMT","currency":"EGP","lastPrice":24.49,"mktCap":6875.87,"consensusTP":null,"consensusUpside":null,"mtrFV":33.5,"mtrUpside":0.3679,"lastFinancials":"Mar-26","ttmEPS":0.6,"ttmPE":40.82,"bvps":5.1,"pb":4.802,"dpsLast":0.85,"dpsProposed":0,"dyPct":0.0347,"payoutRatio":0,"roae":0.1403,"fy":"2026","isBank":false,"evEbitda":9.13,"netDebt":2049.2,"netDebtEquity":1.431},{"sector":"Food, Beverages & Tobacco","ticker":"OLFI","currency":"EGP","lastPrice":22.37,"mktCap":9056,"consensusTP":28.32,"consensusUpside":0.2658,"mtrFV":31.1,"mtrUpside":0.3903,"lastFinancials":"Mar-26","ttmEPS":1.83,"ttmPE":12.22,"bvps":3.389,"pb":6.6,"dpsLast":1.75,"dpsProposed":0,"dyPct":0.0782,"payoutRatio":0,"roae":0.6532,"fy":"2026","isBank":false,"evEbitda":8.03,"netDebt":5780.96,"netDebtEquity":4.213},{"sector":"Food, Beverages & Tobacco","ticker":"JUFO","currency":"EGP","lastPrice":30.8,"mktCap":35867.53,"consensusTP":34.85,"consensusUpside":0.1314,"mtrFV":33,"mtrUpside":0.0714,"lastFinancials":"Mar-26","ttmEPS":1.388,"ttmPE":22.19,"bvps":7.556,"pb":4.076,"dpsLast":0.3,"dpsProposed":0.4,"dyPct":0.013,"payoutRatio":0.2882,"roae":0.2873,"fy":"2026","isBank":false,"evEbitda":8.82,"netDebt":6174.34,"netDebtEquity":0.702},{"sector":"Food, Beverages & Tobacco","ticker":"SUGR","currency":"EGP","lastPrice":48.69,"mktCap":6960.6,"consensusTP":69.3,"consensusUpside":0.4233,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Dec-25","ttmEPS":-3.7,"ttmPE":null,"bvps":14.41,"pb":3.379,"dpsLast":5,"dpsProposed":0,"dyPct":0.1027,"payoutRatio":0,"roae":-0.3374,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":5297,"netDebtEquity":2.571},{"sector":"Food, Beverages & Tobacco","ticker":"IFAP","currency":"EGP","lastPrice":19.62,"mktCap":9692.15,"consensusTP":null,"consensusUpside":null,"mtrFV":15.4,"mtrUpside":-0.2151,"lastFinancials":"Dec-25","ttmEPS":1.22,"ttmPE":16.08,"bvps":8.971,"pb":2.187,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1756,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-294.89,"netDebtEquity":-0.0665},{"sector":"Food, Beverages & Tobacco","ticker":"POUL","currency":"EGP","lastPrice":36.7,"mktCap":16765.06,"consensusTP":30,"consensusUpside":-0.1826,"mtrFV":39.9,"mtrUpside":0.0872,"lastFinancials":"Mar-26","ttmEPS":5.38,"ttmPE":6.82,"bvps":15.86,"pb":2.314,"dpsLast":0.848,"dpsProposed":0,"dyPct":0.0231,"payoutRatio":0,"roae":0.3816,"fy":"2026","isBank":false,"evEbitda":3.1,"netDebt":-5397.91,"netDebtEquity":-0.745},{"sector":"Food, Beverages & Tobacco","ticker":"EAST","currency":"EGP","lastPrice":39.83,"mktCap":114690,"consensusTP":49.5,"consensusUpside":0.2428,"mtrFV":55.3,"mtrUpside":0.3884,"lastFinancials":"Dec-25","ttmEPS":3.45,"ttmPE":11.54,"bvps":4.416,"pb":9.019,"dpsLast":2.85,"dpsProposed":0,"dyPct":0.0716,"payoutRatio":0,"roae":0.8063,"fy":"2026","isBank":false,"evEbitda":9.3,"netDebt":3817.02,"netDebtEquity":0.3},{"sector":"Food, Beverages & Tobacco","ticker":"MTIE","currency":"EGP","lastPrice":9.22,"mktCap":17088.89,"consensusTP":10.06,"consensusUpside":0.0906,"mtrFV":10.8,"mtrUpside":0.1714,"lastFinancials":"Mar-26","ttmEPS":0.54,"ttmPE":17.07,"bvps":2.754,"pb":3.348,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.2697,"fy":"2026","isBank":false,"evEbitda":10.62,"netDebt":6166.8,"netDebtEquity":1.208},{"sector":"Food, Beverages & Tobacco","ticker":"KRDI","currency":"EGP","lastPrice":0.348,"mktCap":1396.2,"consensusTP":null,"consensusUpside":null,"mtrFV":0.47,"mtrUpside":0.3506,"lastFinancials":"Dec-25","ttmEPS":0.0126,"ttmPE":27.62,"bvps":0.1158,"pb":3.005,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1138,"fy":"2026","isBank":false,"evEbitda":10.94,"netDebt":-401.9,"netDebtEquity":-0.865},{"sector":"Education Services","ticker":"CIRA","currency":"EGP","lastPrice":26.8,"mktCap":15659.58,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Feb-26","ttmEPS":1.115,"ttmPE":24.03,"bvps":3.332,"pb":8.044,"dpsLast":0.343,"dpsProposed":0,"dyPct":0.0128,"payoutRatio":0,"roae":0.3732,"fy":"2026","isBank":false,"evEbitda":8.66,"netDebt":2428.42,"netDebtEquity":1.247},{"sector":"Education Services","ticker":"SCTS","currency":"EGP","lastPrice":606.3,"mktCap":55427.18,"consensusTP":null,"consensusUpside":null,"mtrFV":315.7,"mtrUpside":-0.4793,"lastFinancials":"Feb-26","ttmEPS":22.58,"ttmPE":26.85,"bvps":53.73,"pb":11.285,"dpsLast":12.26,"dpsProposed":0,"dyPct":0.0202,"payoutRatio":0,"roae":0.4681,"fy":"2026","isBank":false,"evEbitda":21.84,"netDebt":-4446.85,"netDebtEquity":-0.905},{"sector":"Education Services","ticker":"TALM","currency":"EGP","lastPrice":16.22,"mktCap":11825.34,"consensusTP":22.9,"consensusUpside":0.4118,"mtrFV":22.8,"mtrUpside":0.4057,"lastFinancials":"Feb-26","ttmEPS":0.838,"ttmPE":19.35,"bvps":2.733,"pb":5.936,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.334,"fy":"2026","isBank":false,"evEbitda":13.39,"netDebt":1803.48,"netDebtEquity":0.905},{"sector":"Energy & Support Services","ticker":"AMOC","currency":"EGP","lastPrice":7.8,"mktCap":10202.85,"consensusTP":9.13,"consensusUpside":0.1699,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":1.153,"ttmPE":6.77,"bvps":4.145,"pb":1.882,"dpsLast":0.8,"dpsProposed":0.4,"dyPct":0.0513,"payoutRatio":0.3471,"roae":0.2158,"fy":"2026","isBank":false,"evEbitda":3.97,"netDebt":-2438.27,"netDebtEquity":-0.4497},{"sector":"Energy & Support Services","ticker":"EGAS","currency":"EGP","lastPrice":51.52,"mktCap":7499.56,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":2.17,"ttmPE":23.74,"bvps":34.56,"pb":1.491,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0718,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-237.22,"netDebtEquity":-0.0472},{"sector":"Energy & Support Services","ticker":"TAQA","currency":"EGP","lastPrice":15.64,"mktCap":21394.24,"consensusTP":null,"consensusUpside":null,"mtrFV":18.8,"mtrUpside":0.202,"lastFinancials":"Mar-26","ttmEPS":0.779,"ttmPE":20.08,"bvps":3.54,"pb":4.418,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.22,"fy":"2026","isBank":false,"evEbitda":8.94,"netDebt":2754.07,"netDebtEquity":0.5687},{"sector":"Energy & Support Services","ticker":"MOIL","currency":"USD","lastPrice":0.474,"mktCap":223.37,"consensusTP":null,"consensusUpside":null,"mtrFV":0.8,"mtrUpside":0.6878,"lastFinancials":"Dec-25","ttmEPS":0.0973,"ttmPE":4.87,"bvps":0.5,"pb":0.948,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.4854,"fy":"2026","isBank":false,"evEbitda":2.63,"netDebt":290.01,"netDebtEquity":1.231},{"sector":"Energy & Support Services","ticker":"CCAP","currency":"EGP","lastPrice":5.04,"mktCap":22000.77,"consensusTP":3.5,"consensusUpside":-0.3056,"mtrFV":5.59,"mtrUpside":0.1091,"lastFinancials":"Sep-25","ttmEPS":-0.661,"ttmPE":null,"bvps":-1.218,"pb":null,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":null,"fy":"2026","isBank":false,"evEbitda":9.41,"netDebt":77438.64,"netDebtEquity":-14.568},{"sector":"Energy & Support Services","ticker":"VLMR","currency":"USD","lastPrice":0.672,"mktCap":1424,"consensusTP":1.3,"consensusUpside":0.9345,"mtrFV":1.1,"mtrUpside":0.6369,"lastFinancials":"Mar-26","ttmEPS":0.1116,"ttmPE":6.02,"bvps":0.52,"pb":1.292,"dpsLast":0.0333,"dpsProposed":0.045,"dyPct":0.0670,"payoutRatio":0.4032,"roae":0.3489,"fy":"2026","isBank":false,"evEbitda":3.59,"netDebt":256.85,"netDebtEquity":0.233},{"sector":"Real Estate & Hospitality","ticker":"EMFD","currency":"EGP","lastPrice":12.22,"mktCap":65363.15,"consensusTP":12.1,"consensusUpside":-0.0098,"mtrFV":12.5,"mtrUpside":0.0229,"lastFinancials":"Mar-26","ttmEPS":1.833,"ttmPE":6.67,"bvps":13.59,"pb":0.899,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1446,"fy":"2026","isBank":false,"evEbitda":2.81,"netDebt":-41871.64,"netDebtEquity":-0.576},{"sector":"Real Estate & Hospitality","ticker":"TMGH","currency":"EGP","lastPrice":95.3,"mktCap":197163.35,"consensusTP":132.75,"consensusUpside":0.393,"mtrFV":143,"mtrUpside":0.5005,"lastFinancials":"Mar-26","ttmEPS":7.311,"ttmPE":13.03,"bvps":46.26,"pb":2.06,"dpsLast":0.3,"dpsProposed":0,"dyPct":0.00315,"payoutRatio":0,"roae":0.176,"fy":"2026","isBank":false,"evEbitda":12.62,"netDebt":-41855.46,"netDebtEquity":-0.437},{"sector":"Real Estate & Hospitality","ticker":"OCDI","currency":"EGP","lastPrice":20.7,"mktCap":26430.52,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":2.964,"ttmPE":6.98,"bvps":12.51,"pb":1.654,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.2691,"fy":"2026","isBank":false,"evEbitda":8.03,"netDebt":27414.68,"netDebtEquity":1.716},{"sector":"Real Estate & Hospitality","ticker":"PHDC","currency":"EGP","lastPrice":16.1,"mktCap":44929.25,"consensusTP":21.44,"consensusUpside":0.3314,"mtrFV":13.6,"mtrUpside":-0.1553,"lastFinancials":"Mar-26","ttmEPS":1.353,"ttmPE":11.9,"bvps":6.675,"pb":2.412,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.2257,"fy":"2026","isBank":false,"evEbitda":7.45,"netDebt":11693.5,"netDebtEquity":0.628},{"sector":"Real Estate & Hospitality","ticker":"MASR","currency":"EGP","lastPrice":7.14,"mktCap":14859.6,"consensusTP":10.77,"consensusUpside":0.5083,"mtrFV":8,"mtrUpside":0.1204,"lastFinancials":"Mar-26","ttmEPS":1.573,"ttmPE":4.54,"bvps":6.155,"pb":1.16,"dpsLast":0.15,"dpsProposed":0,"dyPct":0.021,"payoutRatio":0,"roae":0.2941,"fy":"2026","isBank":false,"evEbitda":3.56,"netDebt":-165.29,"netDebtEquity":-0.0129},{"sector":"Real Estate & Hospitality","ticker":"HELI","currency":"EGP","lastPrice":6.43,"mktCap":26354.58,"consensusTP":7.59,"consensusUpside":0.1807,"mtrFV":5.9,"mtrUpside":-0.0824,"lastFinancials":"Mar-26","ttmEPS":0.82,"ttmPE":7.84,"bvps":2.638,"pb":2.437,"dpsLast":0.45,"dpsProposed":0,"dyPct":0.07,"payoutRatio":0,"roae":0.2428,"fy":"2026","isBank":false,"evEbitda":11.95,"netDebt":4952.41,"netDebtEquity":0.458},{"sector":"Real Estate & Hospitality","ticker":"BONY","currency":"EGP","lastPrice":5.25,"mktCap":9289,"consensusTP":6.53,"consensusUpside":0.2432,"mtrFV":7.9,"mtrUpside":0.5048,"lastFinancials":"Mar-26","ttmEPS":1.293,"ttmPE":4.06,"bvps":7.536,"pb":0.697,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.17,"fy":"2026","isBank":false,"evEbitda":2.71,"netDebt":1155.1,"netDebtEquity":0.0866},{"sector":"Real Estate & Hospitality","ticker":"ORHD","currency":"EGP","lastPrice":37.28,"mktCap":42957.99,"consensusTP":50.7,"consensusUpside":0.36,"mtrFV":25.8,"mtrUpside":-0.3079,"lastFinancials":"Mar-26","ttmEPS":4.626,"ttmPE":8.06,"bvps":16.09,"pb":2.317,"dpsLast":0.38,"dpsProposed":0.31,"dyPct":0.00832,"payoutRatio":0.067,"roae":0.3288,"fy":"2026","isBank":false,"evEbitda":6.12,"netDebt":51.91,"netDebtEquity":0.00280},{"sector":"Contracting & Engineering Industries","ticker":"ORAS","currency":"USD","lastPrice":779,"mktCap":79887.55,"consensusTP":714.61,"consensusUpside":-0.0827,"mtrFV":656.4,"mtrUpside":-0.1574,"lastFinancials":"Mar-26","ttmEPS":1.77,"ttmPE":8.3,"bvps":7.9,"pb":1.861,"dpsLast":12.23,"dpsProposed":0,"dyPct":0.0157,"payoutRatio":0,"roae":0.288,"fy":"2026","isBank":false,"evEbitda":6.22,"netDebt":1155.1,"netDebtEquity":1.426},{"sector":"Contracting & Engineering Industries","ticker":"SWDY","currency":"EGP","lastPrice":86.39,"mktCap":184899,"consensusTP":80,"consensusUpside":-0.074,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":8.375,"ttmPE":10.31,"bvps":33.98,"pb":2.542,"dpsLast":1.85,"dpsProposed":0,"dyPct":0.0214,"payoutRatio":0,"roae":0.274,"fy":"2026","isBank":false,"evEbitda":7.06,"netDebt":25148.29,"netDebtEquity":0.346},{"sector":"Petrochemicals & Chemicals","ticker":"SKPC","currency":"EGP","lastPrice":16.34,"mktCap":18767.7,"consensusTP":18.33,"consensusUpside":0.1218,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":0.88,"ttmPE":18.57,"bvps":7.707,"pb":2.12,"dpsLast":1,"dpsProposed":0.4,"dyPct":0.0245,"payoutRatio":0.4545,"roae":0.1119,"fy":"2026","isBank":false,"evEbitda":31.25,"netDebt":-507.75,"netDebtEquity":-0.0574},{"sector":"Petrochemicals & Chemicals","ticker":"KZPC","currency":"EGP","lastPrice":10.62,"mktCap":2554.55,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Dec-25","ttmEPS":0.1797,"ttmPE":59.09,"bvps":2.822,"pb":3.763,"dpsLast":0.45,"dpsProposed":0,"dyPct":0.0424,"payoutRatio":0,"roae":0.0603,"fy":"2026","isBank":false,"evEbitda":9.63,"netDebt":1851.5,"netDebtEquity":2.727},{"sector":"Petrochemicals & Chemicals","ticker":"MICH","currency":"EGP","lastPrice":37,"mktCap":4051.86,"consensusTP":37.35,"consensusUpside":0.00946,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":4.881,"ttmPE":7.58,"bvps":13.26,"pb":2.79,"dpsLast":4,"dpsProposed":0,"dyPct":0.1081,"payoutRatio":0,"roae":0.3747,"fy":"2026","isBank":false,"evEbitda":6.11,"netDebt":-191.51,"netDebtEquity":-0.1319},{"sector":"Fertilizers","ticker":"ABUK","currency":"EGP","lastPrice":72.62,"mktCap":91801.46,"consensusTP":76.55,"consensusUpside":0.0542,"mtrFV":68.3,"mtrUpside":-0.0595,"lastFinancials":"Mar-26","ttmEPS":11.79,"ttmPE":6.16,"bvps":20.2,"pb":3.596,"dpsLast":6,"dpsProposed":2.3,"dyPct":0.0317,"payoutRatio":0.195,"roae":0.2557,"fy":"2026","isBank":false,"evEbitda":5.48,"netDebt":-22756.82,"netDebtEquity":-0.891},{"sector":"Fertilizers","ticker":"EFIC","currency":"EGP","lastPrice":205,"mktCap":20455,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Dec-25","ttmEPS":8.19,"ttmPE":25.03,"bvps":30.33,"pb":6.76,"dpsLast":15,"dpsProposed":5,"dyPct":0.0244,"payoutRatio":0.6105,"roae":0.2514,"fy":"2026","isBank":false,"evEbitda":11.78,"netDebt":6347.89,"netDebtEquity":2.098},{"sector":"Fertilizers","ticker":"EGCH","currency":"EGP","lastPrice":13.2,"mktCap":26421.5,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-25","ttmEPS":1.6,"ttmPE":8.25,"bvps":7.6,"pb":1.737,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0451,"fy":"2026","isBank":false,"evEbitda":11.03,"netDebt":9053,"netDebtEquity":0.5951},{"sector":"Fertilizers","ticker":"MFPC","currency":"EGP","lastPrice":37.53,"mktCap":110193.95,"consensusTP":34.45,"consensusUpside":-0.0821,"mtrFV":45,"mtrUpside":0.199,"lastFinancials":"Mar-26","ttmEPS":4.795,"ttmPE":7.83,"bvps":18.51,"pb":2.028,"dpsLast":3.5,"dpsProposed":0,"dyPct":0.0933,"payoutRatio":0,"roae":0.2718,"fy":"2026","isBank":false,"evEbitda":5.97,"netDebt":-12146.3,"netDebtEquity":-0.2235},{"sector":"Metal & Mining","ticker":"EGAL","currency":"EGP","lastPrice":299.59,"mktCap":129199.13,"consensusTP":275,"consensusUpside":-0.0821,"mtrFV":377.9,"mtrUpside":0.2614,"lastFinancials":"Dec-25","ttmEPS":20.32,"ttmPE":14.74,"bvps":58.04,"pb":5.162,"dpsLast":8,"dpsProposed":0,"dyPct":0.0267,"payoutRatio":0,"roae":0.385,"fy":"2026","isBank":false,"evEbitda":10.2,"netDebt":-7762.04,"netDebtEquity":-0.3101},{"sector":"Metal & Mining","ticker":"ISMQ","currency":"EGP","lastPrice":8.16,"mktCap":8176.42,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Dec-25","ttmEPS":0.64,"ttmPE":12.74,"bvps":0.5688,"pb":14.35,"dpsLast":0.42,"dpsProposed":0,"dyPct":0.0515,"payoutRatio":0,"roae":1.3242,"fy":"2026","isBank":false,"evEbitda":9.7,"netDebt":-482.12,"netDebtEquity":-0.846},{"sector":"Metal & Mining","ticker":"ASCM","currency":"EGP","lastPrice":60.67,"mktCap":3035,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Sep-25","ttmEPS":5.44,"ttmPE":11.15,"bvps":52.97,"pb":1.145,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.1,"fy":"2026","isBank":false,"evEbitda":7.32,"netDebt":2267.45,"netDebtEquity":0.856},{"sector":"Textile & Durables","ticker":"DSCW","currency":"EGP","lastPrice":1.79,"mktCap":4770.34,"consensusTP":3.667,"consensusUpside":1.0484,"mtrFV":2.9,"mtrUpside":0.6201,"lastFinancials":"Mar-26","ttmEPS":0.22,"ttmPE":8.14,"bvps":0.8596,"pb":2.082,"dpsLast":0.17,"dpsProposed":0,"dyPct":0.095,"payoutRatio":0,"roae":0.2565,"fy":"2026","isBank":false,"evEbitda":9.29,"netDebt":3194.77,"netDebtEquity":1.395},{"sector":"Textile & Durables","ticker":"CFGH","currency":"USD","lastPrice":0.101,"mktCap":47.97,"consensusTP":null,"consensusUpside":null,"mtrFV":0.2,"mtrUpside":0.9802,"lastFinancials":"Dec-25","ttmEPS":0.02567,"ttmPE":3.93,"bvps":0.0939,"pb":1.075,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.352,"fy":"2026","isBank":false,"evEbitda":5.0,"netDebt":128.18,"netDebtEquity":2.873},{"sector":"Textile & Durables","ticker":"GTWL","currency":"EGP","lastPrice":46.5,"mktCap":668.75,"consensusTP":null,"consensusUpside":null,"mtrFV":66.5,"mtrUpside":0.4301,"lastFinancials":"Mar-26","ttmEPS":-0.583,"ttmPE":null,"bvps":61.2,"pb":0.76,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.00422,"fy":"2026","isBank":false,"evEbitda":5.83,"netDebt":765.43,"netDebtEquity":0.87},{"sector":"Textile & Durables","ticker":"ORWE","currency":"EGP","lastPrice":23.15,"mktCap":15443.79,"consensusTP":27.95,"consensusUpside":0.2072,"mtrFV":30,"mtrUpside":0.2959,"lastFinancials":"Mar-26","ttmEPS":3.02,"ttmPE":7.67,"bvps":32.69,"pb":0.708,"dpsLast":1.6,"dpsProposed":0,"dyPct":0.0691,"payoutRatio":0,"roae":0.1241,"fy":"2026","isBank":false,"evEbitda":4.92,"netDebt":2836.61,"netDebtEquity":0.1301},{"sector":"Building Material","ticker":"ARCC","currency":"EGP","lastPrice":56.79,"mktCap":21364.71,"consensusTP":57.8,"consensusUpside":0.0178,"mtrFV":69.9,"mtrUpside":0.2309,"lastFinancials":"Mar-26","ttmEPS":10.51,"ttmPE":5.4,"bvps":9.51,"pb":5.972,"dpsLast":5.34,"dpsProposed":0,"dyPct":0.094,"payoutRatio":0,"roae":1.2239,"fy":"2026","isBank":false,"evEbitda":3.43,"netDebt":-3119.12,"netDebtEquity":-0.872},{"sector":"Building Material","ticker":"MBSC","currency":"EGP","lastPrice":272,"mktCap":15125.64,"consensusTP":393,"consensusUpside":0.4449,"mtrFV":160.3,"mtrUpside":-0.4107,"lastFinancials":"Mar-26","ttmEPS":79.3,"ttmPE":3.43,"bvps":98.07,"pb":2.774,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":1.1139,"fy":"2026","isBank":false,"evEbitda":4.37,"netDebt":-3576.17,"netDebtEquity":-0.656},{"sector":"Building Material","ticker":"MCQE","currency":"EGP","lastPrice":179.5,"mktCap":17274.24,"consensusTP":124.85,"consensusUpside":-0.3045,"mtrFV":59,"mtrUpside":-0.6713,"lastFinancials":"Mar-26","ttmEPS":21.2,"ttmPE":8.47,"bvps":31.61,"pb":5.679,"dpsLast":10,"dpsProposed":0,"dyPct":0.0557,"payoutRatio":0,"roae":0.77,"fy":"2026","isBank":false,"evEbitda":3.85,"netDebt":-2331.3,"netDebtEquity":-0.766},{"sector":"Building Material","ticker":"LCSW","currency":"EGP","lastPrice":26.6,"mktCap":2469.48,"consensusTP":null,"consensusUpside":null,"mtrFV":43,"mtrUpside":0.6165,"lastFinancials":"Mar-26","ttmEPS":1.902,"ttmPE":13.99,"bvps":50.55,"pb":0.526,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0493,"fy":"2026","isBank":false,"evEbitda":5.01,"netDebt":2261.16,"netDebtEquity":0.482},{"sector":"Building Material","ticker":"ECAP","currency":"EGP","lastPrice":31.73,"mktCap":1702.69,"consensusTP":null,"consensusUpside":null,"mtrFV":27.3,"mtrUpside":-0.1396,"lastFinancials":"Mar-26","ttmEPS":-2.708,"ttmPE":null,"bvps":8.968,"pb":3.538,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":-0.2608,"fy":"2026","isBank":false,"evEbitda":12.3,"netDebt":2236.13,"netDebtEquity":4.647},{"sector":"Building Material","ticker":"CERA","currency":"EGP","lastPrice":1.18,"mktCap":1272.19,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":0.02965,"ttmPE":39.8,"bvps":0.4337,"pb":2.721,"dpsLast":0,"dpsProposed":0,"dyPct":0,"payoutRatio":0,"roae":0.0728,"fy":"2026","isBank":false,"evEbitda":12.25,"netDebt":1178.27,"netDebtEquity":2.52},{"sector":"Automobiles","ticker":"GBCO","currency":"EGP","lastPrice":28.5,"mktCap":30828.2,"consensusTP":33.63,"consensusUpside":0.1801,"mtrFV":42.2,"mtrUpside":0.4807,"lastFinancials":"Mar-26","ttmEPS":2.635,"ttmPE":10.82,"bvps":28.18,"pb":1.011,"dpsLast":0.35,"dpsProposed":0.35,"dyPct":0.0123,"payoutRatio":0.1328,"roae":0.097,"fy":"2026","isBank":false,"evEbitda":8.85,"netDebt":30272.88,"netDebtEquity":0.993},{"sector":"Shipping & Transportation Services","ticker":"ALCN","currency":"EGP","lastPrice":28.82,"mktCap":86703.65,"consensusTP":23.3,"consensusUpside":-0.1915,"mtrFV":26.9,"mtrUpside":-0.0666,"lastFinancials":"Mar-26","ttmEPS":1.82,"ttmPE":15.84,"bvps":3.243,"pb":8.886,"dpsLast":1.973,"dpsProposed":0,"dyPct":0.0685,"payoutRatio":0,"roae":0.3545,"fy":"2026","isBank":false,"evEbitda":15.12,"netDebt":-2888.69,"netDebtEquity":-0.296},{"sector":"Shipping & Transportation Services","ticker":"CSAG","currency":"EGP","lastPrice":31.36,"mktCap":9387,"consensusTP":38.9,"consensusUpside":0.2404,"mtrFV":44.2,"mtrUpside":0.4094,"lastFinancials":"Dec-25","ttmEPS":3.792,"ttmPE":8.27,"bvps":5.709,"pb":5.493,"dpsLast":2.9,"dpsProposed":0,"dyPct":0.0925,"payoutRatio":0,"roae":0.6947,"fy":"2026","isBank":false,"evEbitda":null,"netDebt":-378.79,"netDebtEquity":-0.222},{"sector":"Shipping & Transportation Services","ticker":"ETRS","currency":"EGP","lastPrice":10.1,"mktCap":2200.01,"consensusTP":null,"consensusUpside":null,"mtrFV":null,"mtrUpside":null,"lastFinancials":"Mar-26","ttmEPS":0.712,"ttmPE":14.19,"bvps":7.028,"pb":1.437,"dpsLast":0.25,"dpsProposed":0,"dyPct":0.0248,"payoutRatio":0,"roae":0.2125,"fy":"2026","isBank":false,"evEbitda":11.66,"netDebt":-247.94,"netDebtEquity":-0.162}];
+
+/* =======================================================
+   SECTOR COLOR MAP
+   ======================================================= */
+const SECTOR_COLORS = {
+  'Banks': '#388bfd',
+  'Non-Bank Financial Services': '#bc8cff',
+  'IT, Media & Communication Services': '#39d353',
+  'Health Care & Pharmaceuticals': '#f85149',
+  'Food, Beverages & Tobacco': '#d29922',
+  'Education Services': '#58a6ff',
+  'Energy & Support Services': '#ff7b72',
+  'Real Estate & Hospitality': '#3fb950',
+  'Contracting & Engineering Industries': '#ffa657',
+  'Petrochemicals & Chemicals': '#a5d6ff',
+  'Fertilizers': '#56d364',
+  'Metal & Mining': '#8b949e',
+  'Textile & Durables': '#e3b341',
+  'Building Material': '#f0883e',
+  'Automobiles': '#79c0ff',
+  'Shipping & Transportation Services': '#d2a8ff'
 };
 
-// =========================================
-// UPLOAD FUNCTIONALITY
-// =========================================
-document.getElementById('uploadBtn').addEventListener('click', () => {
-  document.getElementById('uploadModal').classList.add('open');
-});
+const ALL_SECTORS = [...new Set(RAW_DATA.map(d => d.sector))].sort();
 
-document.getElementById('closeUploadModal').addEventListener('click', closeModal);
-document.getElementById('cancelUploadBtn').addEventListener('click', closeModal);
+/* =======================================================
+   STATE
+   ======================================================= */
+let filteredData = [...RAW_DATA];
+let currentPage = 1;
+let pageSize = 25;
+let sortCol = null;
+let sortDir = 'asc';
+let selectedRows = new Set();
+let advancedRules = [];
+let activePreset = null;
+let charts = {};
 
-document.getElementById('uploadArea').addEventListener('click', () => {
-  document.getElementById('fileInput').click();
-});
+/* Column config for main table */
+const TABLE_COLS = [
+  { key: 'select', label: '', visible: true, nosort: true },
+  { key: 'ticker', label: 'Ticker', visible: true },
+  { key: 'sector', label: 'Sector', visible: true },
+  { key: 'currency', label: 'Ccy', visible: true },
+  { key: 'lastPrice', label: 'Price', visible: true, fmt: 'num2' },
+  { key: 'mktCap', label: 'Mkt Cap (mn)', visible: true, fmt: 'mn' },
+  { key: 'consensusTP', label: 'Cons. TP', visible: true, fmt: 'num2' },
+  { key: 'consensusUpside', label: 'Cons. Upside', visible: true, fmt: 'pct' },
+  { key: 'mtrFV', label: 'MTR FV', visible: true, fmt: 'num2' },
+  { key: 'mtrUpside', label: 'MTR Upside', visible: true, fmt: 'pct' },
+  { key: 'ttmPE', label: 'P/E', visible: true, fmt: 'num2' },
+  { key: 'pb', label: 'P/B', visible: true, fmt: 'num2' },
+  { key: 'ttmEPS', label: 'EPS', visible: false, fmt: 'num2' },
+  { key: 'bvps', label: 'BVPS', visible: false, fmt: 'num2' },
+  { key: 'dpsLast', label: 'DPS Last', visible: true, fmt: 'num2' },
+  { key: 'dpsProposed', label: 'DPS Prop.', visible: false, fmt: 'num2' },
+  { key: 'dyPct', label: 'DY (%)', visible: true, fmt: 'pct' },
+  { key: 'payoutRatio', label: 'Payout', visible: false, fmt: 'pct' },
+  { key: 'roae', label: 'ROAE', visible: true, fmt: 'pct' },
+  { key: 'lastFinancials', label: 'Last Fin.', visible: true },
+  { key: 'fy', label: 'FY', visible: false },
+];
 
-document.getElementById('uploadArea').addEventListener('dragover', (e) => {
-  e.preventDefault();
-  document.getElementById('uploadArea').classList.add('dragover');
-});
+/* =======================================================
+   FORMATTERS
+   ======================================================= */
+function fmt(val, type) {
+  if (val === null || val === undefined || val === '') return '<span class="val-nm">N/A</span>';
+  if (typeof val === 'string' && (val.toUpperCase() === 'NM' || val === 'nm')) return '<span class="val-nm">NM</span>';
+  const n = parseFloat(val);
+  if (isNaN(n)) return `<span>${val}</span>`;
 
-document.getElementById('uploadArea').addEventListener('dragleave', () => {
-  document.getElementById('uploadArea').classList.remove('dragover');
-});
-
-document.getElementById('uploadArea').addEventListener('drop', (e) => {
-  e.preventDefault();
-  document.getElementById('uploadArea').classList.remove('dragover');
-  if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
-});
-
-document.getElementById('fileInput').addEventListener('change', (e) => {
-  if (e.target.files.length > 0) handleFileSelect(e.target.files[0]);
-});
-
-function handleFileSelect(file) {
-  const ext = file.name.split('.').pop().toLowerCase();
-  if (!['xlsx', 'xls'].includes(ext)) {
-    alert('Only .xlsx and .xls files are supported');
-    return;
-  }
-  if (file.size > 10 * 1024 * 1024) {
-    alert('File size exceeds 10 MB');
-    return;
-  }
-  
-  document.getElementById('fileInfoName').textContent = file.name;
-  document.getElementById('fileInfoSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-  document.getElementById('fileInfoContainer').style.display = 'block';
-  document.getElementById('confirmUploadBtn').disabled = false;
-  
-  document.getElementById('confirmUploadBtn').onclick = () => processFile(file);
-}
-
-function processFile(file) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const workbook = XLSX.read(e.target.result, { type: 'array' });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const data = XLSX.utils.sheet_to_json(worksheet);
-      
-      if (data.length === 0) throw new Error('File is empty');
-      
-      dashboardData = data;
-      filteredData = [...data];
-      currentPage = 1;
-      
-      localStorage.setItem('dashboardData', JSON.stringify(data));
-      
-      closeModal();
-      alert('✅ Data uploaded successfully! (' + data.length + ' records)');
-      
-      renderAll();
-      
-    } catch (err) {
-      alert('Error: ' + err.message);
+  switch (type) {
+    case 'pct': {
+      const pct = (n * 100).toFixed(1);
+      const cls = n > 0 ? 'val-up' : n < 0 ? 'val-down' : 'val-neutral';
+      return `<span class="${cls}">${n > 0 ? '+' : ''}${pct}%</span>`;
     }
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-function closeModal() {
-  document.getElementById('uploadModal').classList.remove('open');
-  document.getElementById('fileInput').value = '';
-  document.getElementById('fileInfoContainer').style.display = 'none';
-  document.getElementById('confirmUploadBtn').disabled = true;
-}
-
-// =========================================
-// MAIN RENDER FUNCTIONS
-// =========================================
-function renderAll() {
-  renderKPIs();
-  renderCharts();
-  renderTopMovers();
-  renderMainTable();
-}
-
-function renderKPIs() {
-  if (dashboardData.length === 0) return;
-  
-  const kpiGrid = document.getElementById('kpiGrid');
-  const avgPrice = dashboardData.reduce((sum, r) => sum + (parseFloat(r[columns.price]) || 0), 0) / dashboardData.length;
-  const avgUpside = dashboardData.reduce((sum, r) => sum + (parseFloat(r[columns.consensusUpside]) || 0), 0) / dashboardData.length;
-  const sectors = new Set(dashboardData.map(r => r[columns.sector])).size;
-  
-  kpiGrid.innerHTML = `
-    <div class="kpi-card" style="--kpi-color: var(--accent-blue)">
-      <div class="kpi-label">Total Stocks</div>
-      <div class="kpi-value">${dashboardData.length}</div>
-    </div>
-    <div class="kpi-card" style="--kpi-color: var(--accent-green)">
-      <div class="kpi-label">Avg Price</div>
-      <div class="kpi-value">EGP ${avgPrice.toFixed(2)}</div>
-    </div>
-    <div class="kpi-card" style="--kpi-color: var(--accent-amber)">
-      <div class="kpi-label">Avg Upside</div>
-      <div class="kpi-value">${avgUpside.toFixed(1)}%</div>
-    </div>
-    <div class="kpi-card" style="--kpi-color: var(--accent-purple)">
-      <div class="kpi-label">Sectors</div>
-      <div class="kpi-value">${sectors}</div>
-    </div>
-  `;
-}
-
-function renderCharts() {
-  if (dashboardData.length === 0) return;
-  
-  Object.values(charts).forEach(c => c?.destroy?.());
-  charts = {};
-  
-  // Sector grouping
-  const sectorMap = {};
-  dashboardData.forEach(row => {
-    const sector = row[columns.sector] || 'Other';
-    if (!sectorMap[sector]) sectorMap[sector] = [];
-    sectorMap[sector].push(row);
-  });
-  
-  const sectorNames = Object.keys(sectorMap);
-  const colors = ['#388bfd', '#3fb950', '#d29922', '#bc8cff', '#f85149', '#39d353'];
-  
-  // Chart 1: Sector Market Cap
-  const ctx1 = document.getElementById('chartSectorMktCap');
-  if (ctx1) {
-    charts.sectorMktCap = new Chart(ctx1, {
-      type: 'doughnut',
-      data: {
-        labels: sectorNames,
-        datasets: [{
-          data: sectorNames.map(s => sectorMap[s].length),
-          backgroundColor: colors.slice(0, sectorNames.length)
-        }]
-      },
-      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
-    });
-  }
-  
-  // Chart 2: Upside Distribution
-  const ctx2 = document.getElementById('chartUpsideDist');
-  if (ctx2) {
-    const upsideValues = dashboardData.map(r => parseFloat(r[columns.consensusUpside]) || 0).filter(v => !isNaN(v));
-    const ranges = {};
-    upsideValues.forEach(v => {
-      const range = Math.floor(v / 10) * 10;
-      ranges[range] = (ranges[range] || 0) + 1;
-    });
-    
-    charts.upsideDist = new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: Object.keys(ranges).map(k => k + '% - ' + (parseInt(k) + 10) + '%'),
-        datasets: [{
-          label: 'Count',
-          data: Object.values(ranges),
-          backgroundColor: '#388bfd'
-        }]
-      },
-      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y', plugins: { legend: { display: false } } }
-    });
-  }
-  
-  // Chart 3: P/E by Sector
-  const ctx3 = document.getElementById('chartPESector');
-  if (ctx3) {
-    const peData = sectorNames.map(s => {
-      const peValues = sectorMap[s].map(r => parseFloat(r[columns.pe]) || 0).filter(v => v > 0);
-      return peValues.length > 0 ? peValues.reduce((a, b) => a + b) / peValues.length : 0;
-    });
-    
-    charts.peSector = new Chart(ctx3, {
-      type: 'bar',
-      data: {
-        labels: sectorNames,
-        datasets: [{
-          label: 'Avg P/E',
-          data: peData,
-          backgroundColor: colors.slice(0, sectorNames.length)
-        }]
-      },
-      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y', plugins: { legend: { display: false } } }
-    });
+    case 'num2': return `<span>${n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}</span>`;
+    case 'mn': return `<span>${(n/1000).toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0})} bn</span>`;
+    default: return `<span>${val}</span>`;
   }
 }
 
-function renderTopMovers() {
-  if (dashboardData.length === 0) return;
-  
-  const sorted = [...dashboardData]
-    .filter(r => r[columns.consensusUpside])
-    .sort((a, b) => (parseFloat(b[columns.consensusUpside]) || 0) - (parseFloat(a[columns.consensusUpside]) || 0))
-    .slice(0, 10);
-  
-  const tbody = document.getElementById('topMoversBody');
-  tbody.innerHTML = sorted.map(row => `
-    <tr>
-      <td><strong>${row[columns.ticker]}</strong></td>
-      <td>${row[columns.sector]}</td>
-      <td>${row[columns.price]}</td>
-      <td><span style="color:var(--accent-green);font-weight:600">${row[columns.consensusUpside]}%</span></td>
-      <td>${row[columns.mtrUpside]}</td>
-      <td>${row[columns.pe]}</td>
-      <td>${row[columns.pb]}</td>
-      <td>${row[columns.dy]}</td>
-      <td>${row[columns.roae]}</td>
-    </tr>
-  `).join('');
-  
-  document.getElementById('topMoversCount').textContent = sorted.length;
+function rawNum(val) {
+  if (val === null || val === undefined) return null;
+  const n = parseFloat(val);
+  return isNaN(n) ? null : n;
 }
 
-function renderMainTable() {
-  const total = filteredData.length;
-  const totalPages = Math.ceil(total / pageSize);
-  const start = (currentPage - 1) * pageSize;
-  const pageData = filteredData.slice(start, start + pageSize);
-  
-  // Headers
-  const thead = document.getElementById('mainTableHead');
-  thead.innerHTML = `<tr>${Object.values(columns).map(col => `<th class="sortable">${col}</th>`).join('')}</tr>`;
-  
-  // Body
-  const tbody = document.getElementById('mainTableBody');
-  tbody.innerHTML = pageData.map(row => `
-    <tr>
-      ${Object.values(columns).map(col => `<td>${row[col] || '-'}</td>`).join('')}
-    </tr>
-  `).join('');
-  
-  // Pagination
-  document.getElementById('tableShowing').textContent = start + 1;
-  document.getElementById('tableTotal').textContent = total;
-  document.getElementById('paginationInfo').textContent = `Page ${currentPage} of ${totalPages}`;
-  
-  const pageControls = document.getElementById('pageControls');
-  pageControls.innerHTML = `
-    <button class="page-btn" onclick="prevPage()" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>
-    <button class="page-btn" onclick="nextPage()" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>
-  `;
-}
-
-function applyFilters() {
-  const search = document.getElementById('searchInput').value.toLowerCase();
-  filteredData = dashboardData.filter(row => 
-    Object.values(columns).some(col => (row[col] || '').toString().toLowerCase().includes(search))
-  );
-  currentPage = 1;
-  renderMainTable();
-}
-
-function resetFilters() {
-  document.getElementById('searchInput').value = '';
-  filteredData = [...dashboardData];
-  currentPage = 1;
-  renderMainTable();
-}
-
-function prevPage() {
-  if (currentPage > 1) {
-    currentPage--;
-    renderMainTable();
-  }
-}
-
-function nextPage() {
-  const totalPages = Math.ceil(filteredData.length / pageSize);
-  if (currentPage < totalPages) {
-    currentPage++;
-    renderMainTable();
-  }
-}
-
-function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
-  document.getElementById(`tab-${tab}`).style.display = 'block';
-}
-
-function exportAll(format) {
-  if (format === 'csv') {
-    const csv = [Object.values(columns).join(',')]
-      .concat(filteredData.map(r => Object.values(columns).map(c => r[c] || '').join(',')))
-      .join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.csv';
-    a.click();
-  }
-}
-
-// =========================================
-// TAB SWITCHING
-// =========================================
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    switchTab(tab.dataset.tab);
-  });
-});
-
-// =========================================
-// THEME
-// =========================================
-document.getElementById('themeToggle').addEventListener('click', () => {
+/* =======================================================
+   THEME TOGGLE
+   ======================================================= */
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', () => {
   document.body.classList.toggle('light-mode');
-  localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-  updateThemeIcon();
+  themeBtn.textContent = document.body.classList.contains('light-mode') ? '🌕' : '🌙';
+  localStorage.setItem('siu_theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+  setTimeout(() => { Object.values(charts).forEach(c => c && c.update()); }, 100);
 });
 
-function updateThemeIcon() {
-  document.getElementById('themeToggle').textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+/* =======================================================
+   TABS
+   ======================================================= */
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  document.getElementById('tab-' + tab).style.display = '';
+  if (tab === 'charts') renderAnalyticsCharts();
+  localStorage.setItem('siu_tab', tab);
 }
 
-// =========================================
-// PAGE SIZE SELECT
-// =========================================
-document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
-  pageSize = parseInt(e.target.value);
-  currentPage = 1;
-  renderMainTable();
+document.getElementById('mainTabs').addEventListener('click', e => {
+  if (e.target.dataset.tab) switchTab(e.target.dataset.tab);
 });
 
-// =========================================
-// INITIALIZATION
-// =========================================
-function init() {
-  if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light-mode');
-  }
-  updateThemeIcon();
-  
-  const saved = localStorage.getItem('dashboardData');
+/* =======================================================
+   KPI CARDS
+   ======================================================= */
+function renderKPIs() {
+  const data = filteredData.length > 0 ? filteredData : RAW_DATA;
+  const totalMktCap = data.reduce((s, d) => s + (d.mktCap || 0), 0);
+  const withConsUpside = data.filter(d => d.consensusUpside !== null);
+  const avgConsUpside = withConsUpside.length ? withConsUpside.reduce((s, d) => s + d.consensusUpside, 0) / withConsUpside.length : null;
+  const avgPE = data.filter(d => rawNum(d.ttmPE) !== null && rawNum(d.ttmPE) > 0).reduce((a, d, _, arr) => a + rawNum(d.ttmPE) / arr.length, 0);
+  const avgROAE = data.filter(d => rawNum(d.roae) !== null).reduce((a, d, _, arr) => a + rawNum(d.roae) / arr.length, 0);
+  const avgDY = data.filter(d => d.dyPct > 0).reduce((a, d, _, arr) => a + d.dyPct / arr.length, 0);
+  const posUpside = withConsUpside.filter(d => d.consensusUpside > 0).length;
+  const avgPB = data.filter(d => rawNum(d.pb) !== null && rawNum(d.pb) > 0).reduce((a, d, _, arr) => a + rawNum(d.pb) / arr.length, 0);
+
+  const kpis = [
+    { label: 'Total Market Cap', value: `EGP ${(totalMktCap/1e6).toFixed(1)}T`, sub: `${data.length} stocks`, color: 'var(--accent-blue)', badge: null },
+    { label: 'Avg Consensus Upside', value: avgConsUpside !== null ? `${(avgConsUpside*100).toFixed(1)}%` : 'N/A', sub: `${posUpside} stocks with upside`, color: avgConsUpside > 0 ? 'var(--accent-green)' : 'var(--accent-red)', badge: avgConsUpside > 0 ? { cls: 'badge-green', text: '▲ BUY bias' } : { cls: 'badge-red', text: '▼ SELL bias' } },
+    { label: 'Avg P/E (TTM)', value: avgPE.toFixed(1) + 'x', sub: 'Median across coverage', color: 'var(--accent-amber)', badge: null },
+    { label: 'Avg P/B', value: avgPB.toFixed(2) + 'x', sub: 'Price-to-Book', color: 'var(--accent-purple)', badge: avgPB < 1 ? { cls: 'badge-green', text: 'Below NAV avg' } : null },
+    { label: 'Avg ROAE', value: `${(avgROAE*100).toFixed(1)}%`, sub: 'Return on Avg Equity', color: 'var(--accent-green)', badge: avgROAE > 0.25 ? { cls: 'badge-green', text: 'Strong returns' } : null },
+    { label: 'Avg Dividend Yield', value: `${(avgDY*100).toFixed(1)}%`, sub: `${data.filter(d=>d.dyPct>0).length} dividend payers`, color: 'var(--accent-teal)', badge: null },
+    { label: 'Total Sectors', value: new Set(data.map(d=>d.sector)).size, sub: 'across EGX', color: '#ffa657', badge: null },
+    { label: 'Stocks Covered', value: data.length, sub: `of ${RAW_DATA.length} total`, color: 'var(--text-secondary)', badge: null },
+  ];
+
+  document.getElementById('kpiGrid').innerHTML = kpis.map(k => `
+    <div class="kpi-card" style="--kpi-color:${k.color}">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+      ${k.badge ? `<div class="kpi-badge ${k.badge.cls}">${k.badge.text}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+/* =======================================================
+   CHARTS — OVERVIEW
+   ======================================================= */
+function getChartDefaults() {
+  const isDark = !document.body.classList.contains('light-mode');
+  return {
+    color: isDark ? '#8b949e' : '#656d76',
+    gridColor: isDark ? '#21262d' : '#e8ecf0',
+    bgColor: isDark ? '#1c2128' : '#ffffff'
+  };
+}
+
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); charts[id] = null; }
+}
+
+function renderOverviewCharts() {
+  const d = getChartDefaults();
+  const data = RAW_DATA;
+
+  // 1. Market Cap by Sector (donut)
+  destroyChart('chartSectorMktCap');
+  const sectorMC = {};
+  ALL_SECTORS.forEach(s => { sectorMC[s] = data.filter(r => r.sector === s).reduce((a, r) => a + (r.mktCap || 0), 0); });
+  const sorted = Object.entries(sectorMC).sort((a,b) => b[1]-a[1]);
+  charts['chartSectorMktCap'] = new Chart(document.getElementById('chartSectorMktCap'), {
+    type: 'doughnut',
+    data: {
+      labels: sorted.map(([s]) => s.split(' ').slice(0,3).join(' ')),
+      datasets: [{ data: sorted.map(([,v]) => v/1e3), backgroundColor: sorted.map(([s]) => SECTOR_COLORS[s] || '#888'), borderWidth: 0, hoverOffset: 6 }]
+    },
+    options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { color: d.color, font: { size: 10 }, boxWidth: 10, padding: 8 } }, tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed.toFixed(0)}bn EGP` } } } }
+  });
+
+  // 2. Upside distribution (bar)
+  destroyChart('chartUpsideDist');
+  const buckets = { '<-30%': 0, '-30 to 0%': 0, '0-15%': 0, '15-30%': 0, '30-50%': 0, '>50%': 0 };
+  data.filter(r => r.consensusUpside !== null).forEach(r => {
+    const u = r.consensusUpside * 100;
+    if (u < -30) buckets['<-30%']++;
+    else if (u < 0) buckets['-30 to 0%']++;
+    else if (u < 15) buckets['0-15%']++;
+    else if (u < 30) buckets['15-30%']++;
+    else if (u < 50) buckets['30-50%']++;
+    else buckets['>50%']++;
+  });
+  const colors = ['#f85149','#ff7b72','#8b949e','#3fb950','#388bfd','#bc8cff'];
+  charts['chartUpsideDist'] = new Chart(document.getElementById('chartUpsideDist'), {
+    type: 'bar',
+    data: { labels: Object.keys(buckets), datasets: [{ data: Object.values(buckets), backgroundColor: colors, borderRadius: 4, borderSkipped: false }] },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: d.color, font: { size: 10 } }, grid: { display: false } }, y: { ticks: { color: d.color }, grid: { color: d.gridColor }, title: { display: true, text: '# Stocks', color: d.color } } } }
+  });
+
+  // 3. P/E by sector
+  destroyChart('chartPESector');
+  const sectorPE = ALL_SECTORS.map(s => {
+    const vals = data.filter(r => r.sector === s && rawNum(r.ttmPE) !== null && rawNum(r.ttmPE) > 0 && rawNum(r.ttmPE) < 100).map(r => rawNum(r.ttmPE));
+    return { s, avg: vals.length ? vals.reduce((a,v)=>a+v,0)/vals.length : null };
+  }).filter(x => x.avg !== null).sort((a,b) => a.avg - b.avg);
+  charts['chartPESector'] = new Chart(document.getElementById('chartPESector'), {
+    type: 'bar',
+    data: { labels: sectorPE.map(x => x.s.split(' ')[0]), datasets: [{ data: sectorPE.map(x => x.avg.toFixed(1)), backgroundColor: sectorPE.map(x => SECTOR_COLORS[x.s] || '#888'), borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: d.color }, grid: { color: d.gridColor } }, y: { ticks: { color: d.color, font: { size: 9 } }, grid: { display: false } } } }
+  });
+
+  // 4. ROAE by sector
+  destroyChart('chartROAE');
+  const sectorROAE = ALL_SECTORS.map(s => {
+    const vals = data.filter(r => r.sector === s && rawNum(r.roae) !== null).map(r => rawNum(r.roae) * 100);
+    return { s, avg: vals.length ? vals.reduce((a,v)=>a+v,0)/vals.length : null };
+  }).filter(x => x.avg !== null).sort((a,b) => b.avg - a.avg);
+  charts['chartROAE'] = new Chart(document.getElementById('chartROAE'), {
+    type: 'bar',
+    data: { labels: sectorROAE.map(x => x.s.split(' ')[0]), datasets: [{ data: sectorROAE.map(x => x.avg.toFixed(1)), backgroundColor: sectorROAE.map(x => x.avg > 20 ? 'var(--accent-green)' : x.avg > 10 ? 'var(--accent-blue)' : '#8b949e'), borderRadius: 4 }] },
+    options: { responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.parsed.y}%` } } }, scales: { x: { ticks: { color: d.color, font: { size: 9 }, maxRotation: 45 }, grid: { display: false } }, y: { ticks: { color: d.color, callback: v => v + '%' }, grid: { color: d.gridColor } } } }
+  });
+
+  // 5. P/B histogram
+  destroyChart('chartPBDist');
+  const pbBuckets = { '<1': 0, '1-2': 0, '2-4': 0, '4-7': 0, '>7': 0 };
+  data.filter(r => rawNum(r.pb) !== null && rawNum(r.pb) > 0 && rawNum(r.pb) < 20).forEach(r => {
+    const pb = rawNum(r.pb);
+    if (pb < 1) pbBuckets['<1']++;
+    else if (pb < 2) pbBuckets['1-2']++;
+    else if (pb < 4) pbBuckets['2-4']++;
+    else if (pb < 7) pbBuckets['4-7']++;
+    else pbBuckets['>7']++;
+  });
+  charts['chartPBDist'] = new Chart(document.getElementById('chartPBDist'), {
+    type: 'bar',
+    data: { labels: Object.keys(pbBuckets), datasets: [{ data: Object.values(pbBuckets), backgroundColor: ['#3fb950','#58a6ff','#d29922','#ff7b72','#f85149'], borderRadius: 4 }] },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: d.color }, grid: { display: false } }, y: { ticks: { color: d.color }, grid: { color: d.gridColor } } } }
+  });
+
+  // 6. DY by sector
+  destroyChart('chartDY');
+  const sectorDY = ALL_SECTORS.map(s => {
+    const vals = data.filter(r => r.sector === s && r.dyPct > 0).map(r => r.dyPct * 100);
+    return { s, avg: vals.length ? vals.reduce((a,v)=>a+v,0)/vals.length : 0 };
+  }).sort((a,b) => b.avg - a.avg);
+  charts['chartDY'] = new Chart(document.getElementById('chartDY'), {
+    type: 'bar',
+    data: { labels: sectorDY.map(x => x.s.split(' ')[0]), datasets: [{ data: sectorDY.map(x => x.avg.toFixed(2)), backgroundColor: sectorDY.map(x => SECTOR_COLORS[x.s] || '#888'), borderRadius: 4 }] },
+    options: { responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.parsed.y}%` } } }, scales: { x: { ticks: { color: d.color, font: { size: 9 }, maxRotation: 45 }, grid: { display: false } }, y: { ticks: { color: d.color, callback: v => v + '%' }, grid: { color: d.gridColor } } } }
+  });
+}
+
+/* =======================================================
+   TOP MOVERS TABLE
+   ======================================================= */
+function renderTopMovers() {
+  const topOpp = RAW_DATA
+    .filter(d => d.consensusUpside !== null)
+    .sort((a,b) => (b.consensusUpside || 0) - (a.consensusUpside || 0))
+    .slice(0, 10);
+  document.getElementById('topMoversCount').textContent = topOpp.length;
+  document.getElementById('topMoversBody').innerHTML = topOpp.map(r => `
+    <tr onclick="openDrill('${r.ticker}')" style="cursor:pointer">
+      <td><span class="td-ticker">${r.ticker}</span></td>
+      <td><span style="color:${SECTOR_COLORS[r.sector]}">●</span> <span style="font-size:11px">${r.sector.split(' ').slice(0,3).join(' ')}</span></td>
+      <td>${fmt(r.lastPrice, 'num2')}</td>
+      <td>
+        <div class="upside-bar-wrap">
+          ${fmt(r.consensusUpside, 'pct')}
+          <div class="upside-bar-bg"><div class="upside-bar-fill" style="width:${Math.min(100, Math.abs(r.consensusUpside)*100/2)}%;background:${r.consensusUpside>=0?'var(--accent-green)':'var(--accent-red)'}"></div></div>
+        </div>
+      </td>
+      <td>${fmt(r.mtrUpside, 'pct')}</td>
+      <td>${fmt(r.ttmPE, 'num2')}</td>
+      <td>${fmt(r.pb, 'num2')}</td>
+      <td>${fmt(r.dyPct, 'pct')}</td>
+      <td>${fmt(r.roae, 'pct')}</td>
+    </tr>
+  `).join('');
+}
+
+/* =======================================================
+   FILTERS SETUP
+   ======================================================= */
+function setupFilters() {
+  // Sector multi-select
+  const panel = document.getElementById('sectorPanel');
+  panel.innerHTML = `
+    <div class="multiselect-option" onclick="toggleAllSectors(event)">
+      <input type="checkbox" id="sectorAll" checked> All Sectors
+    </div>
+    ${ALL_SECTORS.map(s => `
+      <div class="multiselect-option" onclick="toggleSector(event,'${s}')">
+        <input type="checkbox" class="sector-cb" value="${s}" checked>
+        <span class="sector-dot" style="background:${SECTOR_COLORS[s]}"></span>
+        ${s}
+      </div>
+    `).join('')}
+  `;
+
+  // Preset buttons
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const preset = btn.dataset.preset;
+      if (activePreset === preset) {
+        activePreset = null;
+        btn.classList.remove('active');
+        resetFilters(false);
+      } else {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        activePreset = preset;
+        btn.classList.add('active');
+        applyPreset(preset);
+      }
+    });
+  });
+
+  // Filter inputs
+  ['searchInput','currencyFilter','upsideMin','upsideMax','peMin','peMax'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', debounce(applyFilters, 250));
+    if (el && el.tagName === 'SELECT') el.addEventListener('change', applyFilters);
+  });
+
+  document.getElementById('applyFiltersBtn').addEventListener('click', applyFilters);
+  document.getElementById('resetFiltersBtn').addEventListener('click', () => resetFilters(true));
+  document.getElementById('advancedFilterBtn').addEventListener('click', () => {
+    const fb = document.getElementById('filterBuilder');
+    fb.classList.toggle('open');
+    if (fb.classList.contains('open') && advancedRules.length === 0) addFilterRule();
+  });
+  document.getElementById('addRuleBtn').addEventListener('click', addFilterRule);
+
+  // Column toggles
+  renderColToggle();
+  document.getElementById('colToggleBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('colTogglePanel').classList.toggle('open');
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#sectorDropdown')) document.getElementById('sectorPanel').classList.remove('open');
+    if (!e.target.closest('.col-toggle-wrap')) document.getElementById('colTogglePanel').classList.remove('open');
+  });
+
+  // Load saved preferences
+  const saved = localStorage.getItem('siu_filters');
   if (saved) {
     try {
-      dashboardData = JSON.parse(saved);
-      filteredData = [...dashboardData];
-      renderAll();
-    } catch (e) {
-      console.error('Load error:', e);
-    }
+      const prefs = JSON.parse(saved);
+      if (prefs.pageSize) { pageSize = prefs.pageSize; document.getElementById('pageSizeSelect').value = pageSize; }
+    } catch(e) {}
   }
-  
-  document.getElementById('loadingOverlay').classList.add('hidden');
+
+  document.getElementById('pageSizeSelect').addEventListener('change', e => {
+    pageSize = parseInt(e.target.value);
+    currentPage = 1;
+    renderTable();
+    savePrefs();
+  });
 }
 
-init();
-</script>
+function toggleDropdown(id) {
+  const panel = document.getElementById(id.replace('Dropdown','Panel'));
+  const trigger = document.querySelector(`#${id} .multiselect-trigger`);
+  panel.classList.toggle('open');
+  trigger.classList.toggle('open');
+}
 
+function getSelectedSectors() {
+  const cbs = document.querySelectorAll('.sector-cb');
+  const sel = [...cbs].filter(cb => cb.checked).map(cb => cb.value);
+  return sel.length === ALL_SECTORS.length ? null : sel; // null means all
+}
+
+function toggleAllSectors(e) {
+  e.stopPropagation();
+  const allCb = document.getElementById('sectorAll');
+  document.querySelectorAll('.sector-cb').forEach(cb => cb.checked = allCb.checked);
+  updateSectorLabel();
+}
+
+function toggleSector(e, sector) {
+  e.stopPropagation();
+  const cb = e.currentTarget.querySelector('input[type=checkbox]');
+  if (e.target !== cb) cb.checked = !cb.checked;
+  updateSectorLabel();
+}
+
+function updateSectorLabel() {
+  const sel = getSelectedSectors();
+  const label = document.getElementById('sectorTriggerLabel');
+  if (!sel) label.textContent = 'All Sectors';
+  else if (sel.length === 0) label.textContent = 'None';
+  else if (sel.length === 1) label.textContent = sel[0].split(' ')[0];
+  else label.textContent = `${sel.length} sectors`;
+  const badge = document.querySelector('#sectorDropdown .filter-count-badge');
+  if (sel && sel.length > 0 && sel.length < ALL_SECTORS.length) {
+    if (!badge) {
+      const b = document.createElement('span');
+      b.className = 'filter-count-badge';
+      b.textContent = sel.length;
+      document.querySelector('#sectorDropdown .multiselect-trigger').appendChild(b);
+    } else badge.textContent = sel.length;
+  } else if (badge) badge.remove();
+}
+
+/* =======================================================
+   APPLY FILTERS
+   ======================================================= */
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const currency = document.getElementById('currencyFilter').value;
+  const upsideMin = parseFloat(document.getElementById('upsideMin').value) / 100 || null;
+  const upsideMax = parseFloat(document.getElementById('upsideMax').value) / 100 || null;
+  const peMin = parseFloat(document.getElementById('peMin').value) || null;
+  const peMax = parseFloat(document.getElementById('peMax').value) || null;
+  const selectedSectors = getSelectedSectors();
+
+  filteredData = RAW_DATA.filter(r => {
+    if (search && !r.ticker.toLowerCase().includes(search) && !r.sector.toLowerCase().includes(search)) return false;
+    if (currency && r.currency !== currency) return false;
+    if (selectedSectors && !selectedSectors.includes(r.sector)) return false;
+    if (upsideMin !== null && (r.consensusUpside === null || r.consensusUpside < upsideMin)) return false;
+    if (upsideMax !== null && (r.consensusUpside === null || r.consensusUpside > upsideMax)) return false;
+    if (peMin !== null && (rawNum(r.ttmPE) === null || rawNum(r.ttmPE) < peMin)) return false;
+    if (peMax !== null && (rawNum(r.ttmPE) === null || rawNum(r.ttmPE) > peMax)) return false;
+    return true;
+  });
+
+  // Advanced rules
+  if (advancedRules.length > 0) {
+    const logic = document.getElementById('filterLogic').value;
+    filteredData = filteredData.filter(r => {
+      const results = advancedRules.map(rule => {
+        const val = rawNum(r[rule.field]);
+        if (val === null) return false;
+        switch (rule.op) {
+          case 'gt': return val > parseFloat(rule.val);
+          case 'lt': return val < parseFloat(rule.val);
+          case 'eq': return Math.abs(val - parseFloat(rule.val)) < 0.0001;
+          case 'gte': return val >= parseFloat(rule.val);
+          case 'lte': return val <= parseFloat(rule.val);
+          default: return true;
+        }
+      });
+      return logic === 'AND' ? results.every(Boolean) : results.some(Boolean);
+    });
+  }
+
+  if (sortCol) applySort();
+  currentPage = 1;
+  renderTable();
+  updateResultsCount();
+  savePrefs();
+}
+
+function applyPreset(preset) {
+  resetFilters(false);
+  switch (preset) {
+    case 'undervalued':
+      document.getElementById('upsideMin').value = '';
+      filteredData = RAW_DATA.filter(r => rawNum(r.pb) !== null && rawNum(r.pb) < 1);
+      break;
+    case 'highupside':
+      document.getElementById('upsideMin').value = '25';
+      filteredData = RAW_DATA.filter(r => r.consensusUpside !== null && r.consensusUpside > 0.25);
+      break;
+    case 'highdy':
+      filteredData = RAW_DATA.filter(r => r.dyPct > 0.05);
+      break;
+    case 'banks':
+      filteredData = RAW_DATA.filter(r => r.sector === 'Banks');
+      break;
+    case 'lowpe':
+      filteredData = RAW_DATA.filter(r => rawNum(r.ttmPE) !== null && rawNum(r.ttmPE) > 0 && rawNum(r.ttmPE) < 7);
+      break;
+    case 'highroae':
+      filteredData = RAW_DATA.filter(r => rawNum(r.roae) !== null && rawNum(r.roae) > 0.30);
+      break;
+  }
+  currentPage = 1;
+  renderTable();
+  updateResultsCount();
+}
+
+function resetFilters(clearPreset = true) {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('currencyFilter').value = '';
+  document.getElementById('upsideMin').value = '';
+  document.getElementById('upsideMax').value = '';
+  document.getElementById('peMin').value = '';
+  document.getElementById('peMax').value = '';
+  document.querySelectorAll('.sector-cb').forEach(cb => cb.checked = true);
+  document.getElementById('sectorAll').checked = true;
+  updateSectorLabel();
+  advancedRules = [];
+  document.getElementById('filterRules').innerHTML = '';
+  filteredData = [...RAW_DATA];
+  if (clearPreset) {
+    activePreset = null;
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  }
+  sortCol = null; sortDir = 'asc';
+  currentPage = 1;
+  renderTable();
+  updateResultsCount();
+  showToast('Filters reset', 'info');
+}
+
+function updateResultsCount() {
+  document.getElementById('tableShowing').textContent = Math.min(filteredData.length, pageSize === 9999 ? filteredData.length : pageSize);
+  document.getElementById('tableTotal').textContent = filteredData.length;
+}
+
+/* =======================================================
+   ADVANCED FILTER BUILDER
+   ======================================================= */
+const FILTER_FIELDS = [
+  { key: 'lastPrice', label: 'Last Price' },
+  { key: 'mktCap', label: 'Market Cap (mn)' },
+  { key: 'consensusUpside', label: 'Consensus Upside' },
+  { key: 'mtrUpside', label: 'MTR Upside' },
+  { key: 'ttmPE', label: 'P/E (TTM)' },
+  { key: 'pb', label: 'P/B' },
+  { key: 'dyPct', label: 'Dividend Yield' },
+  { key: 'roae', label: 'ROAE' },
+  { key: 'payoutRatio', label: 'Payout Ratio' },
+  { key: 'ttmEPS', label: 'EPS (TTM)' },
+];
+
+function addFilterRule() {
+  const id = Date.now();
+  advancedRules.push({ id, field: 'consensusUpside', op: 'gt', val: '0' });
+  renderFilterRules();
+}
+
+function renderFilterRules() {
+  document.getElementById('filterRules').innerHTML = advancedRules.map((rule, i) => `
+    <div class="filter-rule" data-rule-id="${rule.id}">
+      ${i > 0 ? `<span class="filter-connector">${document.getElementById('filterLogic').value}</span>` : ''}
+      <select onchange="updateRule(${rule.id},'field',this.value)">
+        ${FILTER_FIELDS.map(f => `<option value="${f.key}" ${rule.field===f.key?'selected':''}>${f.label}</option>`).join('')}
+      </select>
+      <select onchange="updateRule(${rule.id},'op',this.value)">
+        <option value="gt" ${rule.op==='gt'?'selected':''}>></option>
+        <option value="gte" ${rule.op==='gte'?'selected':''}>>= </option>
+        <option value="lt" ${rule.op==='lt'?'selected':''}><</option>
+        <option value="lte" ${rule.op==='lte'?'selected':''}><= </option>
+        <option value="eq" ${rule.op==='eq'?'selected':''}>=</option>
+      </select>
+      <input type="number" value="${rule.val}" onchange="updateRule(${rule.id},'val',this.value)" style="width:90px">
+      <button class="remove-rule-btn" onclick="removeRule(${rule.id})">×</button>
+    </div>
+  `).join('');
+}
+
+function updateRule(id, field, value) {
+  const rule = advancedRules.find(r => r.id === id);
+  if (rule) { rule[field] = value; renderFilterRules(); }
+}
+
+function removeRule(id) {
+  advancedRules = advancedRules.filter(r => r.id !== id);
+  renderFilterRules();
+}
+
+function applyAdvancedFilters() { applyFilters(); showToast('Advanced filters applied', 'success'); }
+
+/* =======================================================
+   SORTING
+   ======================================================= */
+function applySort() {
+  if (!sortCol) return;
+  filteredData.sort((a, b) => {
+    let va = a[sortCol], vb = b[sortCol];
+    if (va === null || va === undefined) return 1;
+    if (vb === null || vb === undefined) return -1;
+    const na = parseFloat(va), nb = parseFloat(vb);
+    if (!isNaN(na) && !isNaN(nb)) return sortDir === 'asc' ? na - nb : nb - na;
+    const sa = String(va).toLowerCase(), sb = String(vb).toLowerCase();
+    return sortDir === 'asc' ? sa.localeCompare(sb) : sb.localeCompare(sa);
+  });
+}
+
+function handleSort(col) {
+  if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  else { sortCol = col; sortDir = 'asc'; }
+  applySort();
+  renderTable();
+  // Update header styles
+  document.querySelectorAll('thead th.sortable').forEach(th => {
+    th.classList.toggle('sort-asc', th.dataset.col === col && sortDir === 'asc');
+    th.classList.toggle('sort-desc', th.dataset.col === col && sortDir === 'desc');
+  });
+}
+
+/* =======================================================
+   COLUMN TOGGLE
+   ======================================================= */
+function renderColToggle() {
+  const panel = document.getElementById('colTogglePanel');
+  panel.innerHTML = '<div style="font-size:11px;font-weight:700;color:var(--text-muted);padding:4px 8px 8px">Toggle Columns</div>' +
+    TABLE_COLS.filter(c => c.key !== 'select').map(col => `
+      <div class="col-toggle-option">
+        <input type="checkbox" ${col.visible ? 'checked' : ''} onchange="toggleCol('${col.key}',this.checked)">
+        ${col.label}
+      </div>
+    `).join('');
+}
+
+function toggleCol(key, visible) {
+  const col = TABLE_COLS.find(c => c.key === key);
+  if (col) { col.visible = visible; renderTable(); }
+}
+
+/* =======================================================
+   RENDER TABLE
+   ======================================================= */
+function renderTableHead() {
+  const visibleCols = TABLE_COLS.filter(c => c.visible);
+  document.getElementById('mainTableHead').innerHTML = `<tr>
+    ${visibleCols.map(col => {
+      if (col.key === 'select') return `<th style="width:40px"><input type="checkbox" id="selectAll" class="row-check" onchange="toggleSelectAll(this)"></th>`;
+      const isSorted = sortCol === col.key;
+      return `<th class="sortable ${isSorted ? (sortDir === 'asc' ? 'sort-asc' : 'sort-desc') : ''}" 
+        data-col="${col.key}" onclick="handleSort('${col.key}')">${col.label}<span class="sort-icon"></span></th>`;
+    }).join('')}
+  </tr>`;
+}
+
+function renderTableBody() {
+  const totalPages = Math.ceil(filteredData.length / (pageSize === 9999 ? Infinity : pageSize));
+  const start = (currentPage - 1) * (pageSize === 9999 ? filteredData.length : pageSize);
+  const end = pageSize === 9999 ? filteredData.length : start + pageSize;
+  const pageData = filteredData.slice(start, end);
+  const visibleCols = TABLE_COLS.filter(c => c.visible);
+
+  if (pageData.length === 0) {
+    document.getElementById('mainTableBody').innerHTML = `
+      <tr><td colspan="${visibleCols.length}">
+        <div class="empty-state">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <h3>No results found</h3>
+          <p>Try adjusting your filters or <button onclick="resetFilters()" style="background:none;border:none;color:var(--accent-blue);cursor:pointer;font-size:13px">reset all filters</button></p>
+        </div>
+      </td></tr>`;
+    return;
+  }
+
+  document.getElementById('mainTableBody').innerHTML = pageData.map(r => {
+    const isSelected = selectedRows.has(r.ticker);
+    const cells = visibleCols.map(col => {
+      if (col.key === 'select') return `<td><input type="checkbox" class="row-check row-select-cb" data-ticker="${r.ticker}" ${isSelected?'checked':''} onchange="toggleRow('${r.ticker}',this)"></td>`;
+      if (col.key === 'ticker') return `<td><a class="td-ticker" href="#" onclick="openDrill('${r.ticker}');return false">${r.ticker}</a></td>`;
+      if (col.key === 'sector') return `<td><span style="color:${SECTOR_COLORS[r.sector]};font-size:10px">●</span> <span style="font-size:11px">${r.sector.split(' ').slice(0,2).join(' ')}</span></td>`;
+      if (col.key === 'currency') return `<td><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">${r.currency}</span></td>`;
+      if (col.key === 'lastFinancials') return `<td style="font-size:11px;color:var(--text-muted)">${r.lastFinancials || '—'}</td>`;
+      if (col.key === 'fy') return `<td style="font-size:11px;color:var(--text-muted)">${r.fy || '—'}</td>`;
+      return `<td>${fmt(r[col.key], col.fmt)}</td>`;
+    });
+    return `<tr class="${isSelected ? 'selected' : ''}" data-ticker="${r.ticker}">${cells.join('')}</tr>`;
+  }).join('');
+
+  // Update showing count
+  document.getElementById('tableShowing').textContent = `${start + 1}–${Math.min(end, filteredData.length)}`;
+  document.getElementById('tableTotal').textContent = filteredData.length;
+}
+
+function renderPagination() {
+  const totalPages = Math.ceil(filteredData.length / (pageSize === 9999 ? 1 : pageSize));
+  if (pageSize === 9999 || totalPages <= 1) {
+    document.getElementById('paginationInfo').textContent = `All ${filteredData.length} results`;
+    document.getElementById('pageControls').innerHTML = '';
+    return;
+  }
+  document.getElementById('paginationInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+  const pages = [];
+  pages.push(`<button class="page-btn" onclick="goPage(1)" ${currentPage===1?'disabled':''}>«</button>`);
+  pages.push(`<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`);
+  for (let i = Math.max(1, currentPage-2); i <= Math.min(totalPages, currentPage+2); i++) {
+    pages.push(`<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`);
+  }
+  pages.push(`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`);
+  pages.push(`<button class="page-btn" onclick="goPage(${totalPages})" ${currentPage===totalPages?'disabled':''}>»</button>`);
+  document.getElementById('pageControls').innerHTML = pages.join('');
+}
+
+function goPage(p) {
+  const totalPages = Math.ceil(filteredData.length / pageSize);
+  currentPage = Math.max(1, Math.min(p, totalPages));
+  renderTable();
+  document.getElementById('mainTableWrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderTable() {
+  renderTableHead();
+  renderTableBody();
+  renderPagination();
+  updateBulkBar();
+}
+
+/* =======================================================
+   ROW SELECTION
+   ======================================================= */
+function toggleRow(ticker, cb) {
+  if (cb.checked) selectedRows.add(ticker);
+  else selectedRows.delete(ticker);
+  const row = document.querySelector(`tr[data-ticker="${ticker}"]`);
+  if (row) row.classList.toggle('selected', cb.checked);
+  updateBulkBar();
+}
+
+function toggleSelectAll(masterCb) {
+  const pageData = getCurrentPageData();
+  pageData.forEach(r => {
+    if (masterCb.checked) selectedRows.add(r.ticker);
+    else selectedRows.delete(r.ticker);
+  });
+  renderTable();
+}
+
+function getCurrentPageData() {
+  const start = (currentPage - 1) * (pageSize === 9999 ? filteredData.length : pageSize);
+  const end = pageSize === 9999 ? filteredData.length : start + pageSize;
+  return filteredData.slice(start, end);
+}
+
+function clearSelection() {
+  selectedRows.clear();
+  renderTable();
+}
+
+function updateBulkBar() {
+  const bar = document.getElementById('bulkBar');
+  document.getElementById('selectedCount').textContent = selectedRows.size;
+  bar.classList.toggle('visible', selectedRows.size > 0);
+}
+
+/* =======================================================
+   EXPORT FUNCTIONS
+   ======================================================= */
+function dataToExport(selection = false) {
+  const rows = selection ? RAW_DATA.filter(r => selectedRows.has(r.ticker)) : filteredData;
+  return rows.map(r => ({
+    Ticker: r.ticker, Sector: r.sector, Currency: r.currency,
+    'Last Price': r.lastPrice, 'Mkt Cap (mn)': r.mktCap,
+    'Consensus TP': r.consensusTP, 'Consensus Upside': r.consensusUpside !== null ? (r.consensusUpside*100).toFixed(2)+'%' : '',
+    'MTR FV': r.mtrFV, 'MTR Upside': r.mtrUpside !== null ? (r.mtrUpside*100).toFixed(2)+'%' : '',
+    'Last Financials': r.lastFinancials, 'TTM EPS': r.ttmEPS, 'TTM P/E': r.ttmPE,
+    'BVPS': r.bvps, 'P/B': r.pb, 'DPS Last': r.dpsLast, 'DPS Proposed': r.dpsProposed,
+    'DY (%)': r.dyPct !== null ? (r.dyPct*100).toFixed(2)+'%' : '',
+    'Payout Ratio': r.payoutRatio !== null ? (r.payoutRatio*100).toFixed(2)+'%' : '',
+    'ROAE': r.roae !== null ? (r.roae*100).toFixed(2)+'%' : '',
+    ...(r.isBank ? { 'CAR': r.car, 'NPLs Ratio': r.nplRatio, 'LTD Ratio': r.ltdRatio } : { 'EV/EBITDA': r.evEbitda, 'Net Debt (mn)': r.netDebt, 'Net Debt/Equity': r.netDebtEquity }),
+    'FY': r.fy
+  }));
+}
+
+function exportAll(type) {
+  doExport(dataToExport(false), type, 'SIU_Dashboard_Export');
+}
+
+function exportSelected(type) {
+  if (selectedRows.size === 0) { showToast('No rows selected', 'error'); return; }
+  doExport(dataToExport(true), type, 'SIU_Selected_Export');
+}
+
+function doExport(data, type, filename) {
+  if (type === 'csv') {
+    const headers = Object.keys(data[0]);
+    const csv = [headers.join(','), ...data.map(r => headers.map(h => JSON.stringify(r[h] ?? '')).join(','))].join('\n');
+    downloadFile(new Blob([csv], { type: 'text/csv' }), filename + '.csv');
+    showToast(`Exported ${data.length} rows to CSV`, 'success');
+  } else {
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Data');
+    XLSX.writeFile(wb, filename + '.xlsx');
+    showToast(`Exported ${data.length} rows to Excel`, 'success');
+  }
+}
+
+function downloadFile(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+}
+
+function copySelectedToClipboard() {
+  const data = dataToExport(selectedRows.size > 0);
+  const headers = Object.keys(data[0]);
+  const text = [headers.join('\t'), ...data.map(r => headers.map(h => r[h] ?? '').join('\t'))].join('\n');
+  navigator.clipboard.writeText(text).then(() => showToast(`Copied ${data.length} rows to clipboard`, 'success'));
+}
+
+/* =======================================================
+   DRILL-DOWN MODAL
+   ======================================================= */
+function openDrill(ticker) {
+  const r = RAW_DATA.find(d => d.ticker === ticker);
+  if (!r) return;
+  document.getElementById('drillTitle').innerHTML = `
+    <span class="td-ticker" style="font-size:20px">${r.ticker}</span>
+    <span style="font-size:14px;font-weight:400;color:var(--text-secondary);margin-left:12px">${r.sector}</span>
+    <span class="kpi-badge badge-blue" style="margin-left:8px">${r.currency}</span>
+  `;
+
+  const fields = [
+    { label: 'Last Price', val: r.lastPrice, fmt: 'num2' },
+    { label: 'Market Cap', val: r.mktCap ? (r.mktCap/1000).toFixed(1)+'bn' : null },
+    { label: 'Consensus TP', val: r.consensusTP, fmt: 'num2' },
+    { label: 'Consensus Upside', val: r.consensusUpside, fmt: 'pct' },
+    { label: 'MTR Fair Value', val: r.mtrFV, fmt: 'num2' },
+    { label: 'MTR Upside', val: r.mtrUpside, fmt: 'pct' },
+    { label: 'TTM EPS', val: r.ttmEPS, fmt: 'num2' },
+    { label: 'TTM P/E', val: r.ttmPE, fmt: 'num2' },
+    { label: 'BVPS', val: r.bvps, fmt: 'num2' },
+    { label: 'P/B', val: r.pb, fmt: 'num2' },
+    { label: 'DPS Last', val: r.dpsLast, fmt: 'num2' },
+    { label: 'DPS Proposed', val: r.dpsProposed, fmt: 'num2' },
+    { label: 'Dividend Yield', val: r.dyPct, fmt: 'pct' },
+    { label: 'Payout Ratio', val: r.payoutRatio, fmt: 'pct' },
+    { label: 'ROAE', val: r.roae, fmt: 'pct' },
+    { label: 'Last Financials', val: r.lastFinancials },
+    ...(r.isBank ? [
+      { label: 'CAR', val: r.car, fmt: 'pct' },
+      { label: 'NPLs Ratio', val: r.nplRatio, fmt: 'pct' },
+      { label: 'LTD Ratio', val: r.ltdRatio, fmt: 'pct' },
+    ] : [
+      { label: 'EV/EBITDA', val: r.evEbitda, fmt: 'num2' },
+      { label: 'Net Debt (mn)', val: r.netDebt, fmt: 'num2' },
+      { label: 'Net Debt/Equity', val: r.netDebtEquity, fmt: 'num2' },
+    ])
+  ];
+
+  document.getElementById('drillBody').innerHTML = `
+    <div class="detail-grid">
+      ${fields.map(f => `
+        <div class="detail-item">
+          <div class="detail-item-label">${f.label}</div>
+          <div class="detail-item-value" style="font-size:14px">${f.val === null || f.val === undefined ? '<span style="color:var(--text-muted)">N/A</span>' : f.fmt ? fmt(f.val, f.fmt) : f.val}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;margin-bottom:8px">Upside Summary</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        ${r.consensusUpside !== null ? `
+          <div style="flex:1;min-width:120px;background:var(--bg-primary);border-radius:var(--radius-md);padding:10px 12px">
+            <div style="font-size:11px;color:var(--text-muted)">Consensus</div>
+            <div style="font-size:18px;font-weight:700;${r.consensusUpside>0?'color:var(--accent-green)':'color:var(--accent-red)'}">${r.consensusUpside>0?'+':''}${(r.consensusUpside*100).toFixed(1)}%</div>
+          </div>` : ''}
+        ${r.mtrUpside !== null ? `
+          <div style="flex:1;min-width:120px;background:var(--bg-primary);border-radius:var(--radius-md);padding:10px 12px">
+            <div style="font-size:11px;color:var(--text-muted)">MTR Upside</div>
+            <div style="font-size:18px;font-weight:700;${r.mtrUpside>0?'color:var(--accent-green)':'color:var(--accent-red)'}">${r.mtrUpside>0?'+':''}${(r.mtrUpside*100).toFixed(1)}%</div>
+          </div>` : ''}
+      </div>
+    </div>
+  `;
+  document.getElementById('drillModal').classList.add('open');
+}
+
+function closeDrill() { document.getElementById('drillModal').classList.remove('open'); }
+document.getElementById('drillModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDrill(); });
+
+/* =======================================================
+   ANALYTICS CHARTS
+   ======================================================= */
+function renderAnalyticsCharts() {
+  const d = getChartDefaults();
+
+  // 1. Top 20 by Mkt Cap (bar)
+  destroyChart('chartMktCapBar');
+  const top20 = [...RAW_DATA].sort((a,b) => (b.mktCap||0) - (a.mktCap||0)).slice(0,20);
+  charts['chartMktCapBar'] = new Chart(document.getElementById('chartMktCapBar'), {
+    type: 'bar',
+    data: {
+      labels: top20.map(r => r.ticker),
+      datasets: [{
+        data: top20.map(r => ((r.mktCap||0)/1000).toFixed(1)),
+        backgroundColor: top20.map(r => SECTOR_COLORS[r.sector] || '#888'),
+        borderRadius: 4
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed.y}bn EGP` } } }, scales: { x: { ticks: { color: d.color }, grid: { display: false } }, y: { ticks: { color: d.color }, grid: { color: d.gridColor }, title: { display: true, text: 'EGP Billion', color: d.color } } } }
+  });
+
+  // 2. P/E vs P/B scatter
+  destroyChart('chartScatter');
+  const scatterData = RAW_DATA.filter(r => rawNum(r.ttmPE) !== null && rawNum(r.ttmPE) > 0 && rawNum(r.ttmPE) < 60 && rawNum(r.pb) !== null && rawNum(r.pb) > 0 && rawNum(r.pb) < 15);
+  const sectorGroups = {};
+  scatterData.forEach(r => {
+    if (!sectorGroups[r.sector]) sectorGroups[r.sector] = [];
+    sectorGroups[r.sector].push({ x: rawNum(r.ttmPE), y: rawNum(r.pb), ticker: r.ticker });
+  });
+  charts['chartScatter'] = new Chart(document.getElementById('chartScatter'), {
+    type: 'scatter',
+    data: { datasets: Object.entries(sectorGroups).map(([s, pts]) => ({ label: s, data: pts, backgroundColor: (SECTOR_COLORS[s] || '#888') + 'aa', pointRadius: 6 })) },
+    options: { responsive: true, plugins: { legend: { labels: { color: d.color, font: { size: 10 }, boxWidth: 10 } }, tooltip: { callbacks: { label: ctx => `${ctx.raw.ticker}: P/E ${ctx.raw.x.toFixed(1)}x, P/B ${ctx.raw.y.toFixed(2)}x` } } }, scales: { x: { title: { display: true, text: 'P/E (TTM)', color: d.color }, ticks: { color: d.color }, grid: { color: d.gridColor } }, y: { title: { display: true, text: 'P/B', color: d.color }, ticks: { color: d.color }, grid: { color: d.gridColor } } }, onClick: (e, els) => { if (els.length > 0) { const ds = charts['chartScatter'].data.datasets[els[0].datasetIndex]; const pt = ds.data[els[0].index]; openDrill(pt.ticker); } } }
+  });
+
+  // 3. Consensus vs MTR Upside by sector
+  destroyChart('chartUpsideComp');
+  const sectorUpside = ALL_SECTORS.map(s => {
+    const d2 = RAW_DATA.filter(r => r.sector === s);
+    const consAvg = d2.filter(r => r.consensusUpside !== null).reduce((a, r, _, arr) => a + r.consensusUpside/arr.length, 0);
+    const mtrAvg = d2.filter(r => r.mtrUpside !== null).reduce((a, r, _, arr) => a + r.mtrUpside/arr.length, 0);
+    return { s, consAvg: (consAvg*100).toFixed(1), mtrAvg: (mtrAvg*100).toFixed(1) };
+  });
+  charts['chartUpsideComp'] = new Chart(document.getElementById('chartUpsideComp'), {
+    type: 'bar',
+    data: {
+      labels: sectorUpside.map(x => x.s.split(' ')[0]),
+      datasets: [
+        { label: 'Consensus Upside', data: sectorUpside.map(x => x.consAvg), backgroundColor: '#388bfd88', borderColor: '#388bfd', borderWidth: 1, borderRadius: 2 },
+        { label: 'MTR Upside', data: sectorUpside.map(x => x.mtrAvg), backgroundColor: '#3fb95088', borderColor: '#3fb950', borderWidth: 1, borderRadius: 2 }
+      ]
+    },
+    options: { responsive: true, plugins: { legend: { labels: { color: d.color, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } }, scales: { x: { ticks: { color: d.color, font: { size: 9 }, maxRotation: 45 }, grid: { display: false } }, y: { ticks: { color: d.color, callback: v => v+'%' }, grid: { color: d.gridColor } } } }
+  });
+
+  // 4. Stocks with upside > 0 by sector
+  destroyChart('chartUpsideCount');
+  const upsideCount = ALL_SECTORS.map(s => ({
+    s,
+    total: RAW_DATA.filter(r => r.sector === s).length,
+    positive: RAW_DATA.filter(r => r.sector === s && r.consensusUpside !== null && r.consensusUpside > 0).length,
+  })).sort((a,b) => b.positive - a.positive);
+  charts['chartUpsideCount'] = new Chart(document.getElementById('chartUpsideCount'), {
+    type: 'bar',
+    data: {
+      labels: upsideCount.map(x => x.s.split(' ')[0]),
+      datasets: [
+        { label: 'Positive Upside', data: upsideCount.map(x => x.positive), backgroundColor: '#3fb950', borderRadius: 2, stack: 'stack' },
+        { label: 'No/Neg Upside', data: upsideCount.map(x => x.total - x.positive), backgroundColor: '#21262d', borderRadius: 2, stack: 'stack' }
+      ]
+    },
+    options: { responsive: true, plugins: { legend: { labels: { color: d.color, font: { size: 11 } } } }, scales: { x: { ticks: { color: d.color, font: { size: 9 }, maxRotation: 45 }, grid: { display: false }, stacked: true }, y: { ticks: { color: d.color }, grid: { color: d.gridColor }, stacked: true } } }
+  });
+
+  // 5. DY vs ROAE by sector
+  destroyChart('chartDYvROAE');
+  const dyroae = ALL_SECTORS.map(s => {
+    const rows = RAW_DATA.filter(r => r.sector === s);
+    const avgDY = rows.filter(r => r.dyPct > 0).reduce((a,r,_,arr) => a + r.dyPct*100/arr.length, 0);
+    const avgROAE = rows.filter(r => rawNum(r.roae) !== null).reduce((a,r,_,arr) => a + rawNum(r.roae)*100/arr.length, 0);
+    return { s, avgDY: avgDY.toFixed(2), avgROAE: avgROAE.toFixed(1) };
+  });
+  charts['chartDYvROAE'] = new Chart(document.getElementById('chartDYvROAE'), {
+    type: 'bar',
+    data: {
+      labels: dyroae.map(x => x.s.split(' ')[0]),
+      datasets: [
+        { label: 'Avg DY (%)', data: dyroae.map(x => x.avgDY), backgroundColor: '#d2992288', borderColor: '#d29922', borderWidth: 1, borderRadius: 2, yAxisID: 'y' },
+        { label: 'Avg ROAE (%)', data: dyroae.map(x => x.avgROAE), backgroundColor: '#bc8cff88', borderColor: '#bc8cff', borderWidth: 1, borderRadius: 2, yAxisID: 'y1' }
+      ]
+    },
+    options: { responsive: true, plugins: { legend: { labels: { color: d.color, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } }, scales: { x: { ticks: { color: d.color, font: { size: 9 }, maxRotation: 45 }, grid: { display: false } }, y: { ticks: { color: d.color, callback: v => v+'%' }, grid: { color: d.gridColor }, title: { display: true, text: 'DY %', color: d.color } }, y1: { position: 'right', ticks: { color: d.color, callback: v => v+'%' }, grid: { display: false }, title: { display: true, text: 'ROAE %', color: d.color } } } }
+  });
+}
+
+/* =======================================================
+   TOAST NOTIFICATIONS
+   ======================================================= */
+function showToast(message, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+  toast.innerHTML = `<span>${icons[type]||''}</span><span>${message}</span>`;
+  document.getElementById('toastContainer').appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+/* =======================================================
+   PREFERENCES
+   ======================================================= */
+function savePrefs() {
+  localStorage.setItem('siu_filters', JSON.stringify({ pageSize }));
+}
+
+/* =======================================================
+   UTILITIES
+   ======================================================= */
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+}
+
+/* =======================================================
+   INIT
+   ======================================================= */
+function init() {
+  // Apply saved theme
+  const savedTheme = localStorage.getItem('siu_theme');
+  if (savedTheme === 'light') { document.body.classList.add('light-mode'); themeBtn.textContent = '🌕'; }
+
+  // Init data
+  filteredData = [...RAW_DATA];
+
+  // Setup UI
+  setupFilters();
+  renderKPIs();
+  renderTopMovers();
+  renderOverviewCharts();
+  renderTable();
+
+  // Restore tab
+  const savedTab = localStorage.getItem('siu_tab') || 'overview';
+  switchTab(savedTab);
+
+  // Hide loader
+  setTimeout(() => {
+    document.getElementById('loadingOverlay').classList.add('hidden');
+    setTimeout(() => document.getElementById('loadingOverlay').remove(), 400);
+  }, 600);
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrill(); });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>
