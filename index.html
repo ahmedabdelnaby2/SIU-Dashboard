@@ -442,105 +442,6 @@ input[type="file"] {
 
 select option { background: var(--bg-secondary); }
 
-.multiselect-dropdown {
-  position: relative;
-  min-width: 180px;
-}
-
-.multiselect-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 7px 10px;
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--text-primary);
-  transition: border-color var(--transition);
-  user-select: none;
-}
-
-.multiselect-trigger:hover { border-color: var(--accent-blue); }
-.multiselect-trigger.open { border-color: var(--accent-blue); box-shadow: 0 0 0 3px var(--accent-blue-subtle); }
-
-.multiselect-panel {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  min-width: 220px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  z-index: 200;
-  padding: 8px;
-  max-height: 280px;
-  overflow-y: auto;
-  display: none;
-}
-
-.multiselect-panel.open { display: block; animation: fadeInDown 0.12s ease; }
-
-.multiselect-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 8px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 13px;
-  transition: background var(--transition);
-}
-
-.multiselect-option:hover { background: var(--bg-card-hover); }
-.multiselect-option input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent-blue); cursor: pointer; }
-
-.filter-count-badge {
-  background: var(--accent-blue);
-  color: #fff;
-  border-radius: 20px;
-  padding: 1px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  min-width: 18px;
-  text-align: center;
-}
-
-.range-inputs { display: flex; align-items: center; gap: 6px; }
-.range-inputs input { width: 80px; }
-.range-sep { color: var(--text-muted); font-size: 12px; }
-
-.filter-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-subtle);
-  margin-top: 10px;
-}
-
-.preset-btn {
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font-sans);
-}
-
-.preset-btn:hover, .preset-btn.active {
-  background: var(--accent-blue-subtle);
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
-}
-
 /* =========================================
    TABLE
    ========================================= */
@@ -816,98 +717,6 @@ tbody td {
   line-height: 1;
 }
 .modal-close:hover { color: var(--text-primary); }
-
-/* Drill-down detail card */
-.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.detail-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; }
-.detail-item-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
-.detail-item-value { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
-
-/* =========================================
-   SECTION HEADERS
-   ========================================= */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-.section-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-.section-title .count {
-  display: inline-block;
-  background: var(--accent-blue-subtle);
-  color: var(--accent-blue);
-  border-radius: 20px;
-  padding: 1px 8px;
-  font-size: 11px;
-  font-weight: 700;
-  margin-left: 8px;
-  vertical-align: middle;
-}
-
-/* =========================================
-   ADVANCED FILTER BUILDER
-   ========================================= */
-.filter-builder { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-subtle); display: none; }
-.filter-builder.open { display: block; animation: fadeInDown 0.15s ease; }
-.filter-rule { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-.filter-rule select, .filter-rule input { width: auto; }
-.filter-connector { font-size: 11px; font-weight: 700; color: var(--accent-amber); text-transform: uppercase; padding: 3px 8px; background: var(--accent-amber-subtle); border-radius: 20px; }
-.add-rule-btn {
-  background: transparent;
-  border: 1px dashed var(--border);
-  color: var(--text-muted);
-  border-radius: var(--radius-md);
-  padding: 5px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  transition: all var(--transition);
-}
-.add-rule-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-.remove-rule-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--accent-red);
-  font-size: 16px;
-  padding: 0 4px;
-  line-height: 1;
-}
-
-/* =========================================
-   TOAST NOTIFICATIONS
-   ========================================= */
-.toast-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9998;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.toast {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 12px 16px;
-  font-size: 13px;
-  box-shadow: var(--shadow-lg);
-  min-width: 250px;
-  max-width: 350px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: slideInRight 0.2s ease;
-}
-.toast.success { border-left: 3px solid var(--accent-green); }
-.toast.error { border-left: 3px solid var(--accent-red); }
-.toast.info { border-left: 3px solid var(--accent-blue); }
 
 /* =========================================
    UPLOAD AREA
@@ -1275,13 +1084,13 @@ const state = {
   sortDirection: 'asc',
   selectedRows: new Set(),
   visibleColumns: {},
-  currentFile: null
+  currentFile: null,
+  charts: {}
 };
 
 const uploadConfig = {
-  maxFileSize: 10 * 1024 * 1024, // 10 MB
-  allowedFormats: ['xlsx', 'xls'],
-  expectedSheets: ['Data', 'Stocks'] // Common sheet names
+  maxFileSize: 10 * 1024 * 1024,
+  allowedFormats: ['xlsx', 'xls']
 };
 
 // =========================================
@@ -1295,19 +1104,12 @@ function formatNumber(num) {
   }).format(num);
 }
 
-function formatPercentage(num) {
-  if (num === null || num === undefined) return 'N/A';
-  return (num * 100).toFixed(2) + '%';
-}
-
 function showToast(message, type = 'info') {
   const toastContainer = document.getElementById('toastContainer');
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
-  
   const icons = { success: '✓', error: '✕', info: 'ℹ' };
   toast.innerHTML = `<span>${icons[type]}</span><span>${message}</span>`;
-  
   toastContainer.appendChild(toast);
   setTimeout(() => toast.remove(), 4000);
 }
@@ -1324,58 +1126,41 @@ const cancelUploadBtn = document.getElementById('cancelUploadBtn');
 const confirmUploadBtn = document.getElementById('confirmUploadBtn');
 const fileInfoContainer = document.getElementById('fileInfoContainer');
 
-uploadBtn.addEventListener('click', () => {
-  uploadModal.classList.add('open');
-});
-
+uploadBtn.addEventListener('click', () => uploadModal.classList.add('open'));
 closeUploadModal.addEventListener('click', () => {
   uploadModal.classList.remove('open');
   resetUploadModal();
 });
-
 cancelUploadBtn.addEventListener('click', () => {
   uploadModal.classList.remove('open');
   resetUploadModal();
 });
 
 uploadArea.addEventListener('click', () => fileInput.click());
-
 uploadArea.addEventListener('dragover', (e) => {
   e.preventDefault();
   uploadArea.classList.add('dragover');
 });
-
-uploadArea.addEventListener('dragleave', () => {
-  uploadArea.classList.remove('dragover');
-});
-
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
 uploadArea.addEventListener('drop', (e) => {
   e.preventDefault();
   uploadArea.classList.remove('dragover');
-  const files = e.dataTransfer.files;
-  if (files.length > 0) handleFileSelection(files[0]);
+  if (e.dataTransfer.files.length > 0) handleFileSelection(e.dataTransfer.files[0]);
 });
-
 fileInput.addEventListener('change', (e) => {
-  if (e.target.files.length > 0) {
-    handleFileSelection(e.target.files[0]);
-  }
+  if (e.target.files.length > 0) handleFileSelection(e.target.files[0]);
 });
 
 function handleFileSelection(file) {
-  // Validate file
   const fileExtension = file.name.split('.').pop().toLowerCase();
-  
   if (!uploadConfig.allowedFormats.includes(fileExtension)) {
     showToast('Only .xlsx and .xls files are supported', 'error');
     return;
   }
-  
   if (file.size > uploadConfig.maxFileSize) {
     showToast('File size exceeds 10 MB limit', 'error');
     return;
   }
-  
   state.currentFile = file;
   displayFileInfo(file);
   confirmUploadBtn.disabled = false;
@@ -1399,70 +1184,196 @@ function resetUploadModal() {
 
 confirmUploadBtn.addEventListener('click', () => {
   if (!state.currentFile) return;
-  
   document.getElementById('fileInfoStatus').textContent = 'Processing...';
-  const progressBar = document.getElementById('uploadProgressBar');
-  progressBar.style.width = '50%';
+  document.getElementById('uploadProgressBar').style.width = '50%';
   
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
-      progressBar.style.width = '75%';
+      document.getElementById('uploadProgressBar').style.width = '75%';
       const workbook = XLSX.read(e.target.result, { type: 'array' });
-      
-      // Get first sheet
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
       
-      if (jsonData.length === 0) {
-        throw new Error('Excel file is empty');
-      }
+      if (jsonData.length === 0) throw new Error('Excel file is empty');
       
-      progressBar.style.width = '90%';
-      
-      // Load new data
+      document.getElementById('uploadProgressBar').style.width = '90%';
       state.data = jsonData;
       state.filteredData = [...jsonData];
       state.currentPage = 1;
-      
-      // Save to localStorage for persistence
       localStorage.setItem('dashboardData', JSON.stringify(jsonData));
       localStorage.setItem('dataUploadDate', new Date().toISOString());
       
-      progressBar.style.width = '100%';
+      document.getElementById('uploadProgressBar').style.width = '100%';
       
       setTimeout(() => {
         uploadModal.classList.remove('open');
         resetUploadModal();
-        showToast(`Data updated successfully! (${jsonData.length} records loaded)`, 'success');
+        showToast(`Data updated! (${jsonData.length} records)`, 'success');
         initializeTable();
         renderTable();
+        renderKPIs();
+        renderCharts();
       }, 300);
       
     } catch (error) {
       document.getElementById('fileInfoStatus').textContent = 'Error processing file';
-      progressBar.style.width = '0%';
+      document.getElementById('uploadProgressBar').style.width = '0%';
       showToast(`Error: ${error.message}`, 'error');
     }
   };
-  
   reader.readAsArrayBuffer(state.currentFile);
 });
+
+// =========================================
+// KPI RENDERING
+// =========================================
+function renderKPIs() {
+  const kpiGrid = document.getElementById('kpiGrid');
+  if (state.data.length === 0) {
+    kpiGrid.innerHTML = '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--text-muted);">No data available</div>';
+    return;
+  }
+
+  const kpis = [
+    { label: 'Total Records', value: state.data.length, color: '--accent-blue' },
+    { label: 'Avg Price', value: calculateAvg('Price'), color: '--accent-green' },
+    { label: 'Total Volume', value: calculateSum('Volume'), color: '--accent-amber' },
+    { label: 'Data Updated', value: formatDate(localStorage.getItem('dataUploadDate')), color: '--accent-purple' }
+  ];
+
+  kpiGrid.innerHTML = kpis.map(kpi => `
+    <div class="kpi-card" style="--kpi-color: var(${kpi.color})">
+      <div class="kpi-label">${kpi.label}</div>
+      <div class="kpi-value">${kpi.value}</div>
+    </div>
+  `).join('');
+}
+
+function calculateAvg(column) {
+  const values = state.data
+    .map(row => parseFloat(row[column]))
+    .filter(v => !isNaN(v));
+  if (values.length === 0) return 'N/A';
+  const avg = values.reduce((a, b) => a + b, 0) / values.length;
+  return formatNumber(avg);
+}
+
+function calculateSum(column) {
+  const values = state.data
+    .map(row => parseFloat(row[column]))
+    .filter(v => !isNaN(v));
+  if (values.length === 0) return 'N/A';
+  return formatNumber(values.reduce((a, b) => a + b, 0));
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return 'N/A';
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+// =========================================
+// CHART RENDERING
+// =========================================
+function renderCharts() {
+  if (state.data.length === 0) return;
+
+  // Destroy existing charts
+  Object.values(state.charts).forEach(chart => chart?.destroy?.());
+  state.charts = {};
+
+  // Chart 1: Sector Market Cap
+  const sectorData = groupByColumn('Sector');
+  const sectorCanvas = document.getElementById('chartSectorMktCap');
+  if (sectorCanvas && sectorData.labels.length > 0) {
+    state.charts.sectorMktCap = new Chart(sectorCanvas, {
+      type: 'doughnut',
+      data: {
+        labels: sectorData.labels,
+        datasets: [{
+          data: sectorData.values,
+          backgroundColor: ['#388bfd', '#3fb950', '#d29922', '#bc8cff', '#f85149']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
+    });
+  }
+
+  // Chart 2: Upside Distribution
+  const upsideCanvas = document.getElementById('chartUpsideDist');
+  if (upsideCanvas) {
+    const ranges = groupByRange('Upside', 5);
+    state.charts.upsideDist = new Chart(upsideCanvas, {
+      type: 'bar',
+      data: {
+        labels: ranges.labels,
+        datasets: [{
+          label: 'Count',
+          data: ranges.values,
+          backgroundColor: '#388bfd'
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y' }
+    });
+  }
+
+  // Chart 3: Market Breadth
+  const breadthCanvas = document.getElementById('chartBreadth');
+  if (breadthCanvas) {
+    const gainers = state.data.filter(r => parseFloat(r.Change) > 0).length;
+    const losers = state.data.filter(r => parseFloat(r.Change) < 0).length;
+    state.charts.breadth = new Chart(breadthCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Gainers', 'Losers'],
+        datasets: [{
+          data: [gainers, losers],
+          backgroundColor: ['#3fb950', '#f85149']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
+    });
+  }
+}
+
+function groupByColumn(column) {
+  const groups = {};
+  state.data.forEach(row => {
+    const key = row[column] || 'Unknown';
+    groups[key] = (groups[key] || 0) + 1;
+  });
+  return { labels: Object.keys(groups), values: Object.values(groups) };
+}
+
+function groupByRange(column, range) {
+  const values = state.data.map(r => parseFloat(r[column])).filter(v => !isNaN(v));
+  if (values.length === 0) return { labels: [], values: [] };
+  
+  const min = Math.floor(Math.min(...values) / range) * range;
+  const max = Math.ceil(Math.max(...values) / range) * range;
+  const ranges = {};
+  
+  for (let i = min; i <= max; i += range) {
+    const label = `${i} - ${i + range}`;
+    ranges[label] = state.data.filter(row => {
+      const val = parseFloat(row[column]);
+      return val >= i && val < i + range;
+    }).length;
+  }
+  
+  return { labels: Object.keys(ranges), values: Object.values(ranges) };
+}
 
 // =========================================
 // TABLE INITIALIZATION & RENDERING
 // =========================================
 function initializeTable() {
   if (state.data.length === 0) return;
-  
   const firstRow = state.data[0];
   const columns = Object.keys(firstRow);
-  
   state.visibleColumns = {};
-  columns.forEach(col => {
-    state.visibleColumns[col] = true;
-  });
+  columns.forEach(col => state.visibleColumns[col] = true);
 }
 
 function renderTable() {
@@ -1476,7 +1387,6 @@ function renderTable() {
     return;
   }
   
-  // Render header
   const columns = Object.keys(state.visibleColumns).filter(col => state.visibleColumns[col]);
   const headerRow = document.getElementById('tableHeader');
   headerRow.innerHTML = '<th style="width:40px;"><input type="checkbox" id="selectAllCheck"></th>';
@@ -1485,46 +1395,33 @@ function renderTable() {
     const th = document.createElement('th');
     th.className = 'sortable';
     th.textContent = col;
-    th.style.cursor = 'pointer';
     th.addEventListener('click', () => sortTable(col));
     headerRow.appendChild(th);
   });
   
-  // Pagination
   const totalPages = Math.ceil(filteredData.length / pageSize);
   const start = (currentPage - 1) * pageSize;
   const end = Math.min(start + pageSize, filteredData.length);
   const pageData = filteredData.slice(start, end);
   
-  // Render rows
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = pageData.map((row, idx) => {
-    const rowHtml = `<tr data-row-index="${start + idx}">
+    return `<tr data-row-index="${start + idx}">
       <td><input type="checkbox" class="row-check" data-row-index="${start + idx}"></td>
-      ${columns.map(col => `<td>${formatCellValue(row[col])}</td>`).join('')}
+      ${columns.map(col => `<td>${formatNumber(row[col])}</td>`).join('')}
     </tr>`;
-    return rowHtml;
   }).join('');
   
-  // Add event listeners
   document.querySelectorAll('.row-check').forEach(checkbox => {
     checkbox.addEventListener('change', toggleRowSelection);
   });
   
   document.getElementById('selectAllCheck').addEventListener('change', toggleAllRows);
-  
-  // Update pagination
   document.getElementById('tableRowCount').textContent = filteredData.length;
   document.getElementById('totalPages').textContent = totalPages;
   document.getElementById('currentPage').textContent = currentPage;
   document.getElementById('prevPageBtn').disabled = currentPage === 1;
   document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
-}
-
-function formatCellValue(value) {
-  if (value === null || value === undefined) return '-';
-  if (typeof value === 'number') return formatNumber(value);
-  return String(value).substring(0, 50);
 }
 
 function sortTable(column) {
@@ -1590,7 +1487,6 @@ function updateBulkBar() {
   }
 }
 
-// Pagination
 document.getElementById('prevPageBtn').addEventListener('click', () => {
   if (state.currentPage > 1) {
     state.currentPage--;
@@ -1612,7 +1508,6 @@ document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
   renderTable();
 });
 
-// Search
 document.getElementById('searchInput').addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase();
   state.filteredData = state.data.filter(row => {
@@ -1657,25 +1552,25 @@ function updateThemeIcon() {
 function init() {
   const loadingOverlay = document.getElementById('loadingOverlay');
   
-  // Load theme preference
   if (localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
   }
   updateThemeIcon();
   
-  // Load persisted data
   const savedData = localStorage.getItem('dashboardData');
   if (savedData) {
     try {
       state.data = JSON.parse(savedData);
       state.filteredData = [...state.data];
       initializeTable();
+      renderTable();
+      renderKPIs();
+      renderCharts();
     } catch (e) {
       console.error('Failed to load saved data:', e);
     }
   }
   
-  // Hide loading overlay
   loadingOverlay.classList.add('hidden');
 }
 
